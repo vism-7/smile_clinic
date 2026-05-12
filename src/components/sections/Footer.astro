@@ -1,0 +1,218 @@
+---
+import FooterForm from '@ui/forms/FooterForm.astro';
+import ContactInfo from '@common/ContactInfo.astro';
+
+// Company Information
+const companyName = 'SmileClinic Dental Studio';
+
+const companyDescription =
+  'SmileClinic Dental Studio provides modern, compassionate dental care for families and individuals in Portage Park, Chicago.';
+
+// Contact Information
+const contactDetails = {
+  address: 'Portage Park, Chicago, IL 60641',
+  phone: '1 (833) 328-2669',
+  email: 'hello@smileclinic.com',
+  website: 'www.smileclinic.com',
+};
+
+// Dynamic Copyright
+const copyrightYear = new Date().getFullYear();
+
+// Developer
+const craftedBy = {
+  name: 'Bhisham',
+  url: 'https://www.gulamoff.dev/',
+};
+
+// Footer Bottom Text
+const trademarkNotice =
+  'Stay connected with us for dental tips, clinic updates, and appointment reminders.';
+---
+
+<footer class="mt-auto w-full bg-gradient-to-b from-white to-teal-50 pb-10">
+
+  <div class="mx-auto w-full max-w-[85rem] px-4 pt-6 pb-10 sm:px-6 lg:px-8">
+
+    <!-- TOP DIVIDER -->
+    <hr class="border-slate-200" />
+
+    <!-- MAIN GRID -->
+    <div class="grid gap-10 pt-12 md:grid-cols-2 xl:grid-cols-4">
+
+      <!-- BRAND -->
+      <div class="xl:col-span-2">
+
+        <!-- LOGO -->
+        <div class="mb-5 flex items-center gap-4">
+
+          <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-500 text-xl text-white shadow-lg">
+            🦷
+          </div>
+
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900">
+              SmileClinic
+            </h2>
+
+            <p class="text-sm text-slate-500">
+              Dental Studio
+            </p>
+          </div>
+
+        </div>
+
+        <!-- DESCRIPTION -->
+        <p class="max-w-md text-pretty leading-7 text-slate-600">
+          {companyDescription}
+        </p>
+
+        <!-- SOCIALS -->
+       <!-- SOCIALS -->
+<div class="mt-7 flex items-center gap-4">
+
+  <!-- Instagram -->
+  <a
+    href="#"
+    class="group flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-pink-300 hover:text-pink-600"
+    aria-label="Instagram"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 transition duration-300 group-hover:scale-110"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+      <path d="M16 11.37a4 4 0 1 1-7.75 1.25 4 4 0 0 1 7.75-1.25z"></path>
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+    </svg>
+  </a>
+
+  <!-- Facebook -->
+  <a
+    href="#"
+    class="group flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-300 hover:text-blue-600"
+    aria-label="Facebook"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 transition duration-300 group-hover:scale-110"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12"
+      />
+    </svg>
+  </a>
+
+  <!-- WhatsApp -->
+  <a
+    href="#"
+    class="group flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-green-300 hover:text-green-600"
+    aria-label="WhatsApp"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 transition duration-300 group-hover:scale-110"
+      fill="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M20.52 3.48A11.8 11.8 0 0 0 12.05 0C5.5 0 .17 5.33.17 11.88c0 2.1.55 4.16 1.6 5.97L0 24l6.34-1.66a11.8 11.8 0 0 0 5.71 1.45h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.23-6.15-3.42-8.43ZM12.06 21.3h-.01a9.3 9.3 0 0 1-4.74-1.29l-.34-.2-3.76.99 1-3.67-.22-.37a9.32 9.32 0 1 1 8.07 4.54Zm5.1-6.95c-.28-.14-1.67-.82-1.93-.91-.26-.1-.45-.14-.64.14-.19.28-.73.91-.9 1.1-.16.19-.33.21-.61.07-.28-.14-1.18-.43-2.25-1.37-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.13-.13.28-.33.42-.49.14-.16.19-.28.28-.47.1-.19.05-.35-.02-.49-.07-.14-.64-1.54-.88-2.1-.23-.56-.47-.48-.64-.49l-.55-.01c-.19 0-.49.07-.75.35-.26.28-.98.96-.98 2.34 0 1.38 1 2.72 1.14 2.91.14.19 1.97 3.01 4.77 4.22.67.29 1.19.46 1.59.59.67.21 1.28.18 1.76.11.54-.08 1.67-.68 1.9-1.33.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.54-.33Z"
+      />
+    </svg>
+  </a>
+
+  <!-- Location -->
+  <a
+    href="#"
+    class="group flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal-300 hover:text-teal-600"
+    aria-label="Location"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 transition duration-300 group-hover:scale-110"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M17.657 16.657L13.414 20.9a2 2 0 0 1-2.828 0l-4.243-4.243a8 8 0 1 1 11.314 0z"
+      />
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M15 11a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"
+      />
+    </svg>
+  </a>
+
+</div>
+
+      </div>
+
+      <!-- CONTACT -->
+      <div class="transition-all duration-300 hover:-translate-y-1">
+
+        <h3 class="mb-5 text-sm font-semibold uppercase tracking-wider text-slate-800">
+          Contact Info
+        </h3>
+
+        <ContactInfo {...contactDetails} />
+
+      </div>
+
+      <!-- FORM -->
+      <div class="transition-all duration-300 hover:-translate-y-1">
+
+        <h3 class="mb-5 text-sm font-semibold uppercase tracking-wider text-slate-800">
+          More Information
+        </h3>
+
+        <FooterForm />
+
+      </div>
+
+    </div>
+
+    <!-- BOTTOM DIVIDER -->
+    <hr class="my-8 border-slate-200" />
+
+    <!-- BOTTOM -->
+    <div class="flex flex-col gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+
+      <!-- COPYRIGHT -->
+      <p class="text-sm text-slate-500">
+        &copy; 2018-{copyrightYear} {companyName}
+
+        <span class="mx-1">•</span>
+
+        Crafted by
+
+        <a
+          href={craftedBy.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-medium text-teal-700 transition hover:text-teal-500"
+        >
+          {craftedBy.name}
+        </a>
+      </p>
+
+      <!-- FOOTER TEXT -->
+      <p class="text-sm text-slate-500">
+        <Fragment set:html={trademarkNotice} />
+      </p>
+
+    </div>
+
+  </div>
+
+</footer>

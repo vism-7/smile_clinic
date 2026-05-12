@@ -1,0 +1,99 @@
+---
+import Button from '@ui/Button.astro';
+
+const title =
+  'Top Dentist in Portage Park, Chicago';
+
+const highlight =
+  'Modern Dental Care';
+
+const subTitle =
+  'At 6 Corners Dental Studio, we combine advanced dentistry with a calm, comfortable experience designed around your confidence, health, and long-term smile care.';
+
+const secondaryCTA = {
+  text: 'Explore Services',
+  href: '/services',
+};
+
+const primaryCTA = {
+  text: 'Book Appointment',
+  href: '/contact',
+};
+---
+
+{/* HERO CONTENT */}
+<div class="relative mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
+
+  <!-- Soft Glow -->
+  <div class="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-teal-200/30 blur-3xl sm:h-96 sm:w-96"></div>
+
+  <div class="relative">
+
+    <!-- Premium Badge -->
+    <div class="flex justify-start sm:justify-center">
+
+      <div class="inline-flex items-center gap-3 rounded-full border border-white/60 bg-white/80 px-4 py-2 shadow-lg shadow-slate-200/50 backdrop-blur-xl sm:px-5">
+
+        <span class="h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.9)]"></span>
+
+        <span class="text-[11px] font-semibold uppercase tracking-[0.22em] text-slate-700 sm:text-xs">
+          Trusted Dental Studio in Chicago
+        </span>
+
+      </div>
+
+    </div>
+
+    <!-- Heading -->
+    <div class="mx-auto mt-8 max-w-5xl text-left sm:mt-10 sm:text-center">
+
+      <h1
+        class="text-[2.9rem] font-bold leading-[0.95] tracking-tight text-slate-900 sm:text-6xl md:text-7xl lg:text-[5.4rem]"
+      >
+
+        {title}
+
+        <span class="mt-3 block bg-gradient-to-r from-teal-600 via-cyan-500 to-teal-600 bg-clip-text text-transparent sm:mt-5">
+          {highlight}
+        </span>
+
+      </h1>
+
+    </div>
+
+    <!-- Subtitle -->
+    <div class="mx-auto mt-7 max-w-3xl text-left sm:mt-8 sm:text-center">
+
+      <p class="text-[1.02rem] leading-8 text-slate-600 sm:text-xl sm:leading-9">
+        {subTitle}
+      </p>
+
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="mt-10 flex flex-col gap-4 sm:mt-12 sm:flex-row sm:justify-center">
+
+      <Button
+        href={primaryCTA.href}
+        variant="primary"
+        className="group inline-flex w-full items-center justify-center rounded-2xl border border-teal-400/20 bg-gradient-to-r from-teal-600 via-teal-500 to-cyan-500 px-7 py-4 text-sm font-semibold shadow-[0_20px_50px_rgba(13,148,136,0.28)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_25px_60px_rgba(13,148,136,0.38)] sm:w-auto sm:px-9 sm:py-5 sm:text-base"
+      >
+        {primaryCTA.text}
+      </Button>
+
+      <Button
+        href={secondaryCTA.href}
+        variant="secondary"
+        className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-200 bg-white/80 px-7 py-4 text-sm font-semibold shadow-lg shadow-slate-200/50 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-teal-200 hover:bg-white sm:w-auto sm:px-9 sm:py-5 sm:text-base"
+      >
+        {secondaryCTA.text}
+      </Button>
+
+    </div>
+
+   
+    </div>
+
+  </div>
+
+</div>

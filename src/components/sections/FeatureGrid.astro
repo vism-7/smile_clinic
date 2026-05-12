@@ -1,0 +1,184 @@
+---
+import { Image } from 'astro:assets';
+
+import clinicImage from '@images/cleaning.webp';
+import doctorImage from '@images/doctor-2.webp';
+import smileImage from '@images/smile.webp';
+
+const title =
+  'Why Patients Choose <span class="text-teal-600">Smile</span><span class="font-light text-slate-400">Clinic</span>';
+
+const subTitle =
+  'Premium dental care designed around comfort, precision, and beautiful long-term results.';
+
+const features = [
+  {
+    title: 'Modern Technology',
+    description:
+      'Advanced diagnostics and precision-focused dental treatments for comfortable care.',
+    image: clinicImage,
+    tag: 'Advanced Care',
+  },
+
+  {
+    title: 'Comfort First',
+    description:
+      'Relaxing spaces and gentle treatments designed to reduce stress and anxiety.',
+    image: doctorImage,
+    tag: 'Relaxed Experience',
+  },
+
+  {
+    title: 'Personalized Care',
+    description:
+      'Tailored treatments focused on long-term oral health and confident smiles.',
+    image: smileImage,
+    tag: 'Tailored For You',
+  },
+];
+---
+
+<section class="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-32">
+
+  <!-- Background Accent -->
+  <div class="absolute inset-x-0 top-0 h-[32rem] bg-gradient-to-b from-teal-50/80 to-transparent"></div>
+
+  <!-- Glow -->
+  <div class="absolute top-20 left-0 h-72 w-72 rounded-full bg-teal-100/50 blur-3xl"></div>
+  <div class="absolute right-0 bottom-0 h-[26rem] w-[26rem] rounded-full bg-cyan-100/30 blur-3xl"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+    <!-- TOP -->
+    <div class="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+
+      <!-- Left Heading -->
+      <div>
+
+        <span class="inline-flex items-center rounded-full border border-teal-200 bg-white px-5 py-2 text-sm font-medium text-teal-700 shadow-sm">
+          Why Choose Us
+        </span>
+
+        <h2 class="mt-7 text-4xl font-bold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+          <Fragment set:html={title} />
+        </h2>
+
+      </div>
+
+      <!-- Right Description -->
+      <div class="lg:pl-10">
+
+        <p class="text-lg leading-9 text-slate-600">
+          {subTitle}
+        </p>
+
+        <!-- Divider -->
+        <div class="mt-8 h-[2px] w-28 rounded-full bg-gradient-to-r from-teal-500 to-cyan-400"></div>
+
+      </div>
+
+    </div>
+
+    <!-- STACKED PREMIUM LAYOUT -->
+    <div class="mt-16 space-y-8">
+
+      {
+        features.map((feature, index) => (
+          <div
+            class={`group relative overflow-hidden rounded-[2.8rem] border border-slate-200/70 bg-white shadow-[0_20px_80px_rgba(15,23,42,0.06)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_100px_rgba(15,23,42,0.12)] ${
+              index % 2 !== 0 ? 'lg:ml-24' : 'lg:mr-24'
+            }`}
+          >
+
+            <!-- Glow -->
+            <div class="absolute top-0 right-0 h-48 w-48 rounded-full bg-teal-100/50 blur-3xl"></div>
+
+            <div
+              class={`grid items-center gap-0 lg:grid-cols-2 ${
+                index % 2 !== 0 ? 'lg:[&>*:first-child]:order-2' : ''
+              }`}
+            >
+
+              <!-- Image -->
+              <div class="relative overflow-hidden">
+
+                <Image
+                  src={feature.image}
+                  alt={feature.title}
+                  class="h-[320px] w-full object-cover transition duration-700 group-hover:scale-105 sm:h-[420px]"
+                />
+
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent"></div>
+
+                <!-- Floating Tag -->
+                <div class="absolute left-6 top-6">
+
+                  <span class="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white shadow-xl backdrop-blur-xl">
+                    {feature.tag}
+                  </span>
+
+                </div>
+
+              </div>
+
+              <!-- Content -->
+              <div class="relative p-7 sm:p-10 lg:p-14">
+
+                <!-- Large Number -->
+                <div class="absolute top-8 right-8 text-7xl font-bold leading-none text-slate-100 sm:text-8xl">
+                  0{index + 1}
+                </div>
+
+                <div class="relative z-10 max-w-xl">
+
+                  <h3 class="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl">
+                    {feature.title}
+                  </h3>
+
+                  <p class="mt-6 text-base leading-8 text-slate-600 sm:text-lg sm:leading-9">
+                    {feature.description}
+                  </p>
+
+                  <!-- Mini Features -->
+                  <div class="mt-8 flex flex-wrap gap-3">
+
+                    <div class="rounded-2xl bg-slate-100 px-4 py-3 text-sm font-medium text-slate-700">
+                      Premium Care
+                    </div>
+
+                    <div class="rounded-2xl bg-teal-50 px-4 py-3 text-sm font-medium text-teal-700">
+                      Modern Dentistry
+                    </div>
+
+                  </div>
+
+                  <!-- CTA -->
+                  <a
+                    href="/contact"
+                    class="mt-10 inline-flex items-center gap-4 text-lg font-semibold text-slate-900 transition duration-300 hover:gap-5"
+                  >
+
+                    Schedule Consultation
+
+                    <span class="flex h-11 w-11 items-center justify-center rounded-full bg-teal-500 text-white shadow-lg">
+                      →
+                    </span>
+
+                  </a>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        ))
+      }
+
+    </div>
+
+  </div>
+
+</section>

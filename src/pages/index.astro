@@ -1,0 +1,55 @@
+---
+export const prerender = true;
+import BaseLayout from '@layout/BaseLayout.astro';
+import Hero from '@sections/HeroSection.astro';
+import FeatureShowcase from '@sections/FeatureShowcase.astro';
+// import FeatureBento from "@sections/FeatureBento.astro";
+import FeatureAnimated from '@sections/FeatureAnimated.astro';
+import FeatureGrid from '@sections/FeatureGrid.astro';
+import CTA from '@sections/CTA.astro';
+
+import GsapClient from '@/components/GsapClient.astro';
+import ReviewsSection from '@sections/ReviewsSection.astro';
+import DoctorsSection from '@sections/DoctorSection.astro';
+
+
+---
+
+<BaseLayout>
+  <section class="panel">
+    <Hero />
+  </section>
+
+  <section class="panel">
+    <FeatureShowcase />
+  </section>
+
+  <section class="panel">
+    <FeatureAnimated />
+  </section>
+
+  <section class="panel">
+    <FeatureGrid />
+  </section>
+
+   <section class="panel">
+    <DoctorsSection />
+  </section>
+
+  <section class="panel">
+    <ReviewsSection />
+  </section>
+
+  <section class="panel">
+    <CTA />
+  </section>
+
+  <GsapClient />
+</BaseLayout>
+
+<style>
+  .panel {
+    min-height: 100vh;
+    will-change: transform, opacity, filter;
+  }
+</style>

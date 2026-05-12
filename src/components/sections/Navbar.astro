@@ -1,0 +1,165 @@
+---
+
+import Button from '@ui/Button.astro';
+import { navigationLinks } from '@utils/navigation';
+
+const currentPath = Astro.url.pathname;
+
+// CTA Button
+const primaryCTA = {
+  text: 'Book Appointment',
+  href: '/contact',
+};
+
+---
+
+<header
+  class="fixed left-1/2 top-5 z-50 w-[95%] max-w-7xl -translate-x-1/2"
+>
+
+  <!-- NAVBAR -->
+  <div
+    class="rounded-[2rem] border border-white/30 bg-white/70 shadow-[0_15px_50px_rgba(15,23,42,0.08)] backdrop-blur-2xl"
+  >
+
+    <nav
+      class="flex items-center justify-between px-5 py-4 sm:px-8 lg:px-10"
+    >
+
+      <!-- LOGO -->
+      <a
+        href="/"
+        aria-label="Smile Clinic"
+        class="flex items-center gap-2 text-2xl font-light tracking-tight text-slate-400 transition hover:opacity-80"
+      >
+        <span class="font-semibold text-teal-700">
+          Smile
+        </span>
+
+        Clinic
+      </a>
+
+      <!-- MOBILE MENU BUTTON -->
+      <button
+        type="button"
+        class="hs-collapse-toggle flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 lg:hidden"
+        id="hs-navbar-collapse"
+        aria-expanded="false"
+        aria-controls="hs-navbar"
+        aria-label="Toggle navigation"
+        data-hs-collapse="#hs-navbar"
+      >
+
+        <!-- OPEN -->
+        <svg
+          class="hs-collapse-open:hidden h-5 w-5"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+        </svg>
+
+        <!-- CLOSE -->
+        <svg
+          class="hs-collapse-open:block hidden h-5 w-5"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+
+      </button>
+
+      <!-- NAVIGATION -->
+      <div
+        id="hs-navbar"
+        class="hs-collapse hidden grow basis-full overflow-hidden transition-all duration-300 lg:block"
+      >
+
+        <div
+          class="mt-6 flex flex-col gap-2 lg:mt-0 lg:flex-row lg:items-center lg:justify-between"
+        >
+
+          <!-- LINKS -->
+          <div
+            class="flex flex-col gap-2 lg:ml-14 lg:flex-row lg:items-center lg:gap-2"
+          >
+
+            <!-- HOME -->
+            <a
+              href="/"
+              class={`rounded-2xl px-5 py-3 text-sm font-semibold transition duration-300 ${
+                currentPath === '/'
+                  ? 'bg-teal-600 text-white shadow-lg'
+                  : 'text-slate-700 hover:bg-slate-100'
+              }`}
+              aria-current={currentPath === '/' ? 'page' : undefined}
+            >
+              Home
+            </a>
+
+            <!-- OTHER LINKS -->
+            {
+              navigationLinks.map(link => (
+                <a
+                  href={link.href}
+                  class={`rounded-2xl px-5 py-3 text-sm font-semibold transition duration-300 ${
+                    currentPath === link.href
+                      ? 'bg-teal-600 text-white shadow-lg'
+                      : 'text-slate-700 hover:bg-slate-100'
+                  }`}
+                  aria-current={
+                    currentPath === link.href ? 'page' : undefined
+                  }
+                >
+                  {link.label}
+                </a>
+              ))
+            }
+
+          </div>
+
+          <!-- CTA BUTTON -->
+          <div class="mt-5 lg:mt-0">
+
+            <Button
+              href={primaryCTA.href}
+              variant="primary"
+              className="inline-flex rounded-2xl border-none bg-teal-600 px-6 py-3 text-sm font-semibold shadow-lg transition hover:scale-[1.03] hover:bg-teal-700"
+            >
+              {primaryCTA.text}
+            </Button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </nav>
+
+  </div>
+
+</header>
+
+<!-- PRELINE INIT -->
+<script>
+  document.addEventListener('astro:page-load', async () => {
+    const { HSStaticMethods } = await import('preline');
+    HSStaticMethods.autoInit();
+  });
+</script>

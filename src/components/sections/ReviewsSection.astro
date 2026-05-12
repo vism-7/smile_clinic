@@ -1,0 +1,254 @@
+---
+import review1 from '@images/doctor-1.webp';
+import review2 from '@images/doctor-2.webp';
+import review3 from '@images/doctor-3.webp';
+
+const reviews = [
+  {
+    name: "Sarah Johnson",
+    role: "Cosmetic Dentistry Patient",
+    image: review1,
+    review:
+      "The staff was incredibly friendly and professional. The entire experience felt modern, comfortable, and stress-free from start to finish.",
+  },
+
+  {
+    name: "Michael Lee",
+    role: "Dental Implant Patient",
+    image: review2,
+    review:
+      "Beautiful clinic, advanced technology, and truly caring doctors. Everything was explained clearly and the treatment was completely painless.",
+  },
+
+  {
+    name: "Emily Carter",
+    role: "Family Dentistry Patient",
+    image: review3,
+    review:
+      "I was nervous before my appointment, but the team made me feel relaxed and comfortable the entire time. Highly recommended.",
+  },
+];
+---
+---
+
+<section
+  id="reviews"
+  class="relative overflow-hidden py-20 sm:py-24 lg:py-32"
+>
+
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-white via-teal-50/50 to-white"></div>
+
+  <!-- Glow -->
+  <div class="absolute top-0 left-0 h-72 w-72 rounded-full bg-teal-200/30 blur-3xl sm:h-96 sm:w-96"></div>
+  <div class="absolute right-0 bottom-0 h-[26rem] w-[26rem] rounded-full bg-cyan-100/40 blur-3xl"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+    <!-- Heading -->
+    <div class="mx-auto max-w-4xl text-center">
+
+      <span
+        class="inline-flex items-center rounded-full border border-teal-200 bg-teal-50 px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-teal-700 shadow-sm sm:text-sm"
+      >
+        Patient Reviews
+      </span>
+
+      <h2 class="mt-6 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+        Trusted by Thousands <br class="hidden sm:block" />
+        of Happy Patients
+      </h2>
+
+      <p class="mx-auto mt-6 max-w-3xl text-base leading-8 text-slate-600 sm:text-lg sm:leading-9">
+        Real stories from patients who trust SmileClinic for comfortable,
+        modern, and personalized dental care focused on confidence and
+        long-term oral health.
+      </p>
+
+    </div>
+
+    <!-- Desktop Grid -->
+    <div class="mt-16 hidden gap-8 lg:grid lg:grid-cols-3">
+
+      {
+        reviews.map((review, index) => (
+
+          <div
+            class={`group relative overflow-hidden rounded-[2.5rem] border border-white/60 bg-white/70 p-8 shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur-2xl transition duration-500 hover:-translate-y-3 hover:shadow-2xl ${
+              index === 1 ? 'lg:-mt-8' : ''
+            }`}
+          >
+
+            <!-- Glow -->
+            <div class="absolute top-0 right-0 h-40 w-40 rounded-full bg-teal-100/40 blur-3xl"></div>
+
+            <div class="relative">
+
+              <!-- Quote -->
+              <div class="flex items-center justify-between">
+
+                <div class="flex gap-1 text-xl text-teal-500">
+                  ★★★★★
+                </div>
+
+                <div class="text-6xl leading-none text-teal-100">
+                  ”
+                </div>
+
+              </div>
+
+              <!-- Review -->
+              <p class="mt-8 text-lg leading-9 text-slate-600">
+                "{review.review}"
+              </p>
+
+              <!-- Divider -->
+              <div class="mt-8 h-[2px] w-20 rounded-full bg-gradient-to-r from-teal-500 to-cyan-400"></div>
+
+              <!-- Author -->
+              <div class="mt-8 flex items-center gap-4">
+
+                <!-- Avatar -->
+                <div class="overflow-hidden rounded-2xl shadow-lg">
+  <img
+    src={review.image.src}
+    alt={review.name}
+    class="h-14 w-14 object-cover"
+  />
+</div>
+
+                <div>
+
+                  <h3 class="text-lg font-semibold text-slate-900">
+                    {review.name}
+                  </h3>
+
+                  <p class="mt-1 text-sm text-slate-500">
+                    {review.role}
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        ))
+      }
+
+    </div>
+
+    <!-- Mobile Premium Slider -->
+    <div class="mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-6 lg:hidden">
+
+      {
+        reviews.map((review) => (
+
+          <div
+            class="group relative min-w-[88%] snap-center overflow-hidden rounded-[2.3rem] border border-white/60 bg-white/80 p-6 shadow-[0_15px_50px_rgba(15,23,42,0.08)] backdrop-blur-2xl"
+          >
+
+            <!-- Glow -->
+            <div class="absolute top-0 right-0 h-32 w-32 rounded-full bg-teal-100/40 blur-3xl"></div>
+
+            <div class="relative">
+
+              <!-- Top -->
+              <div class="flex items-center justify-between">
+
+                <div class="flex gap-1 text-lg text-teal-500">
+                  ★★★★★
+                </div>
+
+                <div class="text-5xl leading-none text-teal-100">
+                  ”
+                </div>
+
+              </div>
+
+              <!-- Review -->
+              <p class="mt-6 text-base leading-8 text-slate-600">
+                "{review.review}"
+              </p>
+
+              <!-- Divider -->
+              <div class="mt-6 h-[2px] w-16 rounded-full bg-gradient-to-r from-teal-500 to-cyan-400"></div>
+
+              <!-- Author -->
+              <div class="mt-6 flex items-center gap-4">
+
+               <div class="overflow-hidden rounded-2xl shadow-md">
+  <img
+    src={review.image.src}
+    alt={review.name}
+    class="h-12 w-12 object-cover"
+  />
+</div>
+
+                <div>
+
+                  <h3 class="font-semibold text-slate-900">
+                    {review.name}
+                  </h3>
+
+                  <p class="mt-1 text-sm text-slate-500">
+                    {review.role}
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        ))
+      }
+
+    </div>
+
+    <!-- Bottom Trust Bar -->
+    <div
+      class="mt-20 rounded-[2.5rem] border border-white/60 bg-white/70 px-6 py-8 shadow-[0_20px_70px_rgba(15,23,42,0.06)] backdrop-blur-2xl sm:px-10"
+    >
+
+      <div class="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
+
+        <div>
+
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-teal-700">
+            Trusted Dental Care
+          </p>
+
+          <h3 class="mt-3 text-3xl font-bold text-slate-900">
+            5,000+ Smiles Treated With Care
+          </h3>
+
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4">
+
+          <div class="rounded-2xl bg-teal-50 px-5 py-3 text-sm font-medium text-teal-700 shadow-sm">
+            ★ 4.9 Average Rating
+          </div>
+
+          <div class="rounded-2xl bg-cyan-50 px-5 py-3 text-sm font-medium text-cyan-700 shadow-sm">
+            Comfortable Experience
+          </div>
+
+          <div class="rounded-2xl bg-emerald-50 px-5 py-3 text-sm font-medium text-emerald-700 shadow-sm">
+            Modern Technology
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

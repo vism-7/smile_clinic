@@ -1,0 +1,403 @@
+---
+import { Image } from 'astro:assets';
+
+import doctor1 from '@images/doctor-1.webp';
+import doctor2 from '@images/doctor-2.webp';
+import doctor3 from '@images/doctor-3.webp';
+---
+
+<section class="relative overflow-hidden bg-[#f5fbfb] py-28">
+
+  <!-- Background Effects -->
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(20,184,166,0.10),transparent_30%)]"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(6,182,212,0.10),transparent_30%)]"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+    <!-- SECTION HEADER -->
+    <div class="mx-auto max-w-3xl text-center">
+
+      <span
+        class="inline-flex items-center rounded-full border border-teal-200 bg-white px-5 py-2 text-sm font-semibold tracking-wide text-teal-700 shadow-sm"
+      >
+        OUR DENTAL TEAM
+      </span>
+
+      <h2
+        class="mt-8 text-5xl font-bold tracking-tight text-slate-900 md:text-6xl"
+      >
+        Meet the Experts <br />
+        Behind Your Smile
+      </h2>
+
+      <p
+        class="mx-auto mt-8 max-w-2xl text-lg leading-9 text-slate-600"
+      >
+        Our experienced dental professionals combine advanced expertise
+        with compassionate care to create a comfortable and stress-free
+        experience for every patient.
+      </p>
+
+    </div>
+
+    <!-- DESKTOP LAYOUT -->
+    <div class="mt-24 hidden gap-8 lg:grid lg:grid-cols-[1.15fr_0.85fr]">
+
+      <!-- FEATURED DOCTOR -->
+      <div
+        class="group relative overflow-hidden rounded-[2.8rem] bg-white shadow-[0_25px_80px_rgba(15,23,42,0.08)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_35px_100px_rgba(15,23,42,0.12)]"
+      >
+
+        <!-- Glow -->
+        <div
+          class="absolute right-0 top-0 h-72 w-72 rounded-full bg-teal-100/40 blur-3xl"
+        ></div>
+
+        <!-- Image -->
+        <div class="relative overflow-hidden">
+
+          <Image
+            src={doctor1}
+            alt="Lead Dentist"
+            class="h-[580px] w-full object-cover object-[center_18%] transition duration-700 group-hover:scale-105"
+          />
+
+          <!-- Overlay -->
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"
+          ></div>
+
+          <!-- Floating Badge -->
+          <div
+            class="absolute left-8 top-8 rounded-3xl border border-white/20 bg-white/10 px-6 py-4 text-white shadow-xl backdrop-blur-xl"
+          >
+            <p class="text-xs uppercase tracking-[0.25em] text-white/70">
+              Lead Cosmetic Dentist
+            </p>
+
+            <p class="mt-2 text-xl font-semibold">
+              Smile Transformation Expert
+            </p>
+          </div>
+
+          <!-- Floating Name -->
+          <div class="absolute bottom-8 left-8 right-8">
+
+            <div
+              class="rounded-[2rem] border border-white/10 bg-white/10 p-6 backdrop-blur-xl"
+            >
+
+              <div class="flex items-center gap-3">
+
+                <span class="h-3 w-3 rounded-full bg-teal-400"></span>
+
+                <p
+                  class="text-sm font-semibold uppercase tracking-[0.25em] text-white/80"
+                >
+                  Cosmetic & Restorative Dentistry
+                </p>
+
+              </div>
+
+              <h3 class="mt-4 text-4xl font-bold text-white">
+                Dr. Sarah Mitchell
+              </h3>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Content -->
+        <div class="relative p-10">
+
+          <p
+            class="text-lg leading-9 text-slate-600"
+          >
+            Dr. Mitchell specializes in cosmetic and restorative dentistry,
+            helping patients achieve healthier, brighter smiles through
+            personalized treatment plans and modern dental techniques.
+          </p>
+
+          <!-- Tags -->
+          <div class="mt-10 flex flex-wrap gap-4">
+
+            <div
+              class="rounded-2xl bg-teal-50 px-5 py-3 text-sm font-medium text-teal-700"
+            >
+              Digital Smile Design
+            </div>
+
+            <div
+              class="rounded-2xl bg-cyan-50 px-5 py-3 text-sm font-medium text-cyan-700"
+            >
+              Comfortable Care
+            </div>
+
+            <div
+              class="rounded-2xl bg-emerald-50 px-5 py-3 text-sm font-medium text-emerald-700"
+            >
+              Advanced Technology
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="flex flex-col gap-8">
+
+        <!-- CARD -->
+        <div
+          class="group relative overflow-hidden rounded-[2.5rem] bg-white p-7 shadow-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
+        >
+
+          <div
+            class="absolute right-0 top-0 h-40 w-40 rounded-full bg-cyan-100/40 blur-3xl"
+          ></div>
+
+          <div class="relative flex gap-6">
+
+            <div class="overflow-hidden rounded-[1.8rem]">
+
+              <Image
+                src={doctor2}
+                alt="Doctor"
+                class="h-52 w-44 object-cover transition duration-700 group-hover:scale-105"
+              />
+
+            </div>
+
+            <div class="flex flex-1 flex-col justify-center">
+
+              <span
+                class="inline-flex w-fit rounded-full bg-cyan-50 px-4 py-1 text-sm font-medium text-cyan-700"
+              >
+                Family Dentistry
+              </span>
+
+              <h3
+                class="mt-5 text-3xl font-bold text-slate-900"
+              >
+                Dr. James Carter
+              </h3>
+
+              <p
+                class="mt-4 leading-8 text-slate-600"
+              >
+                Providing gentle preventive and restorative care focused on
+                long-term oral health and patient comfort.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+        <div
+          class="group relative overflow-hidden rounded-[2.5rem] bg-white p-7 shadow-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
+        >
+
+          <div
+            class="absolute right-0 top-0 h-40 w-40 rounded-full bg-emerald-100/40 blur-3xl"
+          ></div>
+
+          <div class="relative flex gap-6">
+
+            <div class="overflow-hidden rounded-[1.8rem]">
+
+              <Image
+                src={doctor3}
+                alt="Doctor"
+                class="h-52 w-44 object-cover transition duration-700 group-hover:scale-105"
+              />
+
+            </div>
+
+            <div class="flex flex-1 flex-col justify-center">
+
+              <span
+                class="inline-flex w-fit rounded-full bg-emerald-50 px-4 py-1 text-sm font-medium text-emerald-700"
+              >
+                Orthodontics
+              </span>
+
+              <h3
+                class="mt-5 text-3xl font-bold text-slate-900"
+              >
+                Dr. Emily Watson
+              </h3>
+
+              <p
+                class="mt-4 leading-8 text-slate-600"
+              >
+                Specialized in Invisalign and smile alignment treatments
+                designed for modern, comfortable results.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- INFO CARD -->
+        <div
+          class="group relative overflow-hidden rounded-[2.5rem] bg-teal-600 p-8 text-white shadow-2xl"
+        >
+
+          <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.15),transparent_35%)]"
+          ></div>
+
+          <div class="relative">
+
+            <span
+              class="inline-flex rounded-full bg-white/10 px-4 py-1 text-sm font-medium backdrop-blur-xl"
+            >
+              Personalized Dental Care
+            </span>
+
+            <h3
+              class="mt-6 text-4xl font-bold leading-tight"
+            >
+              Your Comfort <br />
+              Always Comes First
+            </h3>
+
+            <p
+              class="mt-6 text-lg leading-9 text-teal-50"
+            >
+              We focus on creating calm, stress-free dental experiences
+              using modern technology and compassionate patient care.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- MOBILE SLIDER -->
+    <div class="mt-16 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6 lg:hidden">
+
+      <!-- CARD -->
+      <div
+        class="min-w-[88%] snap-center overflow-hidden rounded-[2.5rem] bg-white shadow-2xl"
+      >
+
+        <div class="relative overflow-hidden">
+
+          <Image
+            src={doctor1}
+            alt="Lead Dentist"
+            class="h-[420px] w-full object-cover"
+          />
+
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent"
+          ></div>
+
+          <div class="absolute bottom-6 left-6">
+
+            <span
+              class="rounded-full bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur-xl"
+            >
+              Lead Cosmetic Dentist
+            </span>
+
+          </div>
+
+        </div>
+
+        <div class="p-7">
+
+          <h3 class="text-3xl font-bold text-slate-900">
+            Dr. Sarah Mitchell
+          </h3>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Cosmetic and restorative dentistry specialist focused on
+            healthy and confident smiles.
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+      <div
+        class="min-w-[88%] snap-center overflow-hidden rounded-[2.5rem] bg-white shadow-2xl"
+      >
+
+        <Image
+          src={doctor2}
+          alt="Doctor"
+          class="h-[420px] w-full object-cover"
+        />
+
+        <div class="p-7">
+
+          <span
+            class="rounded-full bg-cyan-50 px-4 py-1 text-sm font-medium text-cyan-700"
+          >
+            Family Dentistry
+          </span>
+
+          <h3 class="mt-5 text-3xl font-bold text-slate-900">
+            Dr. James Carter
+          </h3>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Preventive and restorative care designed for comfort and
+            long-term oral health.
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- CARD -->
+      <div
+        class="min-w-[88%] snap-center overflow-hidden rounded-[2.5rem] bg-white shadow-2xl"
+      >
+
+        <Image
+          src={doctor3}
+          alt="Doctor"
+          class="h-[420px] w-full object-cover"
+        />
+
+        <div class="p-7">
+
+          <span
+            class="rounded-full bg-emerald-50 px-4 py-1 text-sm font-medium text-emerald-700"
+          >
+            Orthodontics
+          </span>
+
+          <h3 class="mt-5 text-3xl font-bold text-slate-900">
+            Dr. Emily Watson
+          </h3>
+
+          <p class="mt-5 leading-8 text-slate-600">
+            Invisalign and braces specialist delivering modern smile
+            alignment solutions.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

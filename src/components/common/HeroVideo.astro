@@ -1,0 +1,175 @@
+---
+import { Image } from 'astro:assets';
+
+import heroImage from '@images/dentist-hero1.webp';
+import chart from '@images/cleaning.webp';
+import patient_1 from '@images/doctor-1.webp';
+import patient_2 from '@images/doctor-2.webp';
+import patient_3 from '@images/doctor-3.webp';
+---
+
+{/* Hero Visual */}
+<div class="relative mx-auto w-full px-4 pt-14 sm:w-[92%] sm:px-0 sm:pt-20">
+  <!-- Background Glow -->
+  <div
+    class="absolute -top-10 -left-10 h-56 w-56 rounded-full bg-teal-200/30 blur-3xl sm:h-72 sm:w-72"
+  >
+  </div>
+  <div
+    class="absolute top-10 right-0 h-64 w-64 rounded-full bg-cyan-100/40 blur-3xl sm:h-96 sm:w-96"
+  >
+  </div>
+
+  <!-- Mobile Extra Glow -->
+  <div
+    class="absolute inset-x-0 top-24 mx-auto h-52 w-52 rounded-full bg-white/60 blur-3xl sm:hidden"
+  >
+  </div>
+
+  <!-- Gradient Bottom Fade -->
+  <div
+    class="pointer-events-none absolute inset-x-0 -bottom-2 z-20 hidden h-24 bg-gradient-to-b from-transparent via-white/70 to-white sm:block"
+  >
+  </div>
+
+  <!-- Main Hero Card -->
+  <div
+    class="group relative overflow-hidden rounded-[2rem] border border-white/40 bg-white/10 shadow-[0_20px_60px_rgba(15,23,42,0.14)] backdrop-blur-2xl sm:rounded-[2.8rem] sm:shadow-[0_30px_100px_rgba(15,23,42,0.18)]"
+  >
+    <!-- Image -->
+    <div class="relative overflow-hidden">
+      <Image
+        src={heroImage}
+        alt="Dental Clinic"
+        class="h-[520px] w-full scale-105 object-cover object-[center_35%] transition duration-700 group-hover:scale-110 sm:h-[620px]"
+        loading="eager"
+      />
+
+      <!-- Premium Overlay -->
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-slate-900/55 via-slate-900/15 to-transparent"
+      >
+      </div>
+
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-slate-900/55 via-transparent to-transparent"
+      >
+      </div>
+
+      <!-- MOBILE CONTENT -->
+      <div class="absolute inset-x-0 bottom-0 p-5 sm:hidden">
+        <div
+          class="rounded-[1.8rem] border border-white/15 bg-white/10 p-5 shadow-2xl backdrop-blur-xl"
+        >
+          <span
+            class="inline-flex rounded-full border border-white/15 bg-white/10 px-3 py-1 text-[11px] font-semibold tracking-[0.18em] text-white/80 uppercase"
+          >
+            Trusted Dental Studio
+          </span>
+
+          <h2 class="mt-4 text-[2rem] leading-[1.05] font-bold text-white">
+            Modern Care <br />
+            Beautiful Smiles
+          </h2>
+
+          <p class="mt-4 text-sm leading-7 text-white/75">
+            Personalized dental care with modern technology focused on comfort,
+            precision, and confident smiles.
+          </p>
+
+          <!-- Stats -->
+          <div
+            class="mt-6 flex items-center justify-between rounded-2xl border border-white/10 bg-white/10 px-4 py-3"
+          >
+            <div>
+              <p class="text-2xl font-bold text-white">5,000+</p>
+
+              <p class="text-xs tracking-wide text-white/70">Happy Patients</p>
+            </div>
+
+            <div class="h-10 w-px bg-white/10"></div>
+
+            <div>
+              <p class="text-2xl font-bold text-white">12+</p>
+
+              <p class="text-xs tracking-wide text-white/70">
+                Years Experience
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DESKTOP TOP CARD -->
+      <div
+        class="absolute top-6 left-6 hidden rounded-[1.8rem] border border-white/20 bg-white/10 p-5 text-white shadow-2xl backdrop-blur-xl md:block"
+      >
+        <p class="text-xs tracking-[0.25em] text-white/70 uppercase">
+          Trusted Dental Studio
+        </p>
+
+        <h3 class="mt-3 text-2xl font-semibold">
+          Modern Care <br />
+          Beautiful Smiles
+        </h3>
+
+        <div class="mt-5 flex items-center gap-3">
+          <div class="flex -space-x-3">
+            <Image
+              src={patient_1}
+              alt="Patient"
+              class="h-11 w-11 rounded-full border-2 border-white object-cover shadow-lg"
+            />
+
+            <Image
+              src={patient_2}
+              alt="Patient"
+              class="h-11 w-11 rounded-full border-2 border-white object-cover shadow-lg"
+            />
+
+            <Image
+              src={patient_3}
+              alt="Patient"
+              class="h-11 w-11 rounded-full border-2 border-white object-cover shadow-lg"
+            />
+          </div>
+
+          <div>
+            <p class="text-lg font-bold">5,000+</p>
+
+            <p class="text-sm text-white/70">Happy Patients</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Right Floating Card -->
+      <div
+        class="absolute right-6 bottom-6 hidden overflow-hidden rounded-[1.8rem] border border-white/20 bg-white/10 shadow-2xl backdrop-blur-xl lg:block"
+      >
+        <div class="flex items-center gap-5 p-4">
+          <div class="overflow-hidden rounded-2xl">
+            <Image
+              src={chart}
+              alt="Dental Technology"
+              class="h-20 w-24 object-cover"
+            />
+          </div>
+
+          <div>
+            <p class="text-sm tracking-[0.2em] text-white/70 uppercase">
+              Advanced Dentistry
+            </p>
+
+            <h4 class="mt-2 text-xl font-semibold text-white">
+              Digital Precision
+            </h4>
+
+            <p class="mt-2 text-sm leading-6 text-white/70">
+              Comfortable treatments with modern technology.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

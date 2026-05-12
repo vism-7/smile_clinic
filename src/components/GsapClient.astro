@@ -1,0 +1,116 @@
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function runGSAP() {
+
+    const panels = document.querySelectorAll('.panel');
+
+    if (!panels.length) return;
+
+    // Reset
+    gsap.set(panels, {
+      opacity: 1,
+      y: 0,
+    });
+
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+
+    // PANEL ANIMATION
+    panels.forEach((panel) => {
+
+      gsap.fromTo(
+        panel,
+        {
+          opacity: 0,
+          y: 200,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power2.out',
+
+          scrollTrigger: {
+            trigger: panel,
+            start: 'top bottom',
+            end: 'bottom 65%',
+            toggleActions: 'restart none restart none',
+          },
+        }
+      );
+
+    });
+
+    // NORMAL REVEAL CARDS
+    const cards = document.querySelectorAll('.reveal-card');
+
+    cards.forEach((card) => {
+
+      gsap.fromTo(
+        card,
+        {
+          opacity: 0,
+          y: 200,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 92%',
+            end: 'bottom 65%',
+            toggleActions: 'restart none restart none',
+          },
+        }
+      );
+
+    });
+
+    // MOBILE SERVICE CARD ANIMATION
+    if (window.innerWidth < 1024) {
+
+      const serviceCards = document.querySelectorAll('.service-card');
+
+      serviceCards.forEach((card, index) => {
+
+        gsap.fromTo(
+          card,
+          {
+            opacity: 0,
+            y: 80,
+            scale: 0.96,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 1,
+            ease: 'power4.out',
+
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 180%',
+              end: 'bottom 70%',
+              toggleActions: 'restart none restart none',
+            },
+
+            
+          }
+        );
+
+      });
+
+    }
+
+    ScrollTrigger.refresh();
+  }
+
+  // Astro-safe
+  document.addEventListener('astro:page-load', runGSAP);
+</script>

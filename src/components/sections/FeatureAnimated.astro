@@ -1,0 +1,224 @@
+---
+import Icon from '@ui/icons/Icon.astro';
+import Button from '@ui/Button.astro';
+
+import consultation from '@images/consultent.webp';
+import cleaning from '@images/cleaning1.webp';
+import smile from '@images/smile.webp';
+
+// Content
+const title = 'Your Path to a Healthier, Brighter Smile';
+
+const subTitle =
+  'From your first consultation to your final treatment, SmileClinic combines advanced dental technology with compassionate care to deliver a seamless and comfortable experience tailored to every patient.';
+
+// CTA
+const tertiaryCTA = {
+  text: 'Book an Appointment',
+  href: '/contact',
+};
+
+// Journey cards
+const journey = [
+  {
+    image: consultation,
+    title: 'Personal Consultation',
+    description:
+      'A welcoming first visit focused on understanding your needs, concerns, and smile goals.',
+    number: '01',
+  },
+
+  {
+    image: cleaning,
+    title: 'Advanced Treatment',
+    description:
+      'Modern technology and gentle procedures designed for accurate, comfortable care.',
+    number: '02',
+  },
+
+  {
+    image: smile,
+    title: 'Confident Results',
+    description:
+      'Healthy, beautiful smiles that help patients feel more confident every day.',
+    number: '03',
+  },
+];
+---
+
+<section class="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-32">
+
+  <!-- Background Elements -->
+  <div class="absolute inset-0 opacity-[0.03]">
+    <div class="h-full w-full bg-[radial-gradient(#0f172a_1px,transparent_1px)] [background-size:32px_32px]"></div>
+  </div>
+
+  <div class="absolute -top-20 left-0 h-72 w-72 rounded-full bg-teal-100/50 blur-3xl"></div>
+  <div class="absolute right-0 bottom-0 h-[28rem] w-[28rem] rounded-full bg-cyan-100/40 blur-3xl"></div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+    <!-- Heading -->
+    <div class="mx-auto max-w-3xl text-center">
+
+      <span class="inline-flex items-center rounded-full border border-slate-200 bg-white px-5 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700 shadow-sm sm:text-sm">
+        The SmileClinic Experience
+      </span>
+
+      <h2 class="mt-7 text-[2.5rem] font-bold leading-[1.02] tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+        {title}
+      </h2>
+
+      <p class="mx-auto mt-7 max-w-2xl text-[1rem] leading-8 text-slate-600 sm:text-lg sm:leading-9">
+        {subTitle}
+      </p>
+
+    </div>
+
+    <!-- Timeline Layout -->
+    <div class="relative mt-20 sm:mt-24">
+
+      <!-- Center Line -->
+      <div class="absolute left-1/2 top-0 hidden h-full w-[2px] -translate-x-1/2 bg-gradient-to-b from-teal-400 via-cyan-300 to-transparent lg:block"></div>
+
+      <div class="space-y-10 lg:space-y-20">
+
+        {
+          journey.map((item, index) => (
+
+            <div
+              class={`relative grid items-center gap-10 lg:grid-cols-2 ${
+                index % 2 !== 0 ? 'lg:[&>*:first-child]:order-2' : ''
+              }`}
+            >
+
+              <!-- Image Side -->
+              <div class="group relative">
+
+                <!-- Floating Step -->
+                <div class="absolute -top-5 left-5 z-20 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 text-xl font-bold text-white shadow-[0_20px_50px_rgba(13,148,136,0.35)] sm:h-20 sm:w-20 sm:text-2xl lg:left-auto lg:right-[-2.5rem]">
+                  {item.number}
+                </div>
+
+                <!-- Image Card -->
+                <div class="relative overflow-hidden rounded-[2.2rem] shadow-[0_25px_80px_rgba(15,23,42,0.12)]">
+
+                  <img
+                    src={item.image.src}
+                    alt={item.title}
+                    class="h-[320px] w-full object-cover transition duration-700 group-hover:scale-105 sm:h-[420px]"
+                  />
+
+                  <!-- Overlay -->
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/10 to-transparent"></div>
+
+                  <!-- Bottom Content -->
+                  <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+
+                    <span class="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-xl">
+                      Step {item.number}
+                    </span>
+
+                    <h3 class="mt-5 text-3xl font-bold text-white sm:text-4xl">
+                      {item.title}
+                    </h3>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- Content Side -->
+              <div class="relative">
+
+                <!-- Decorative Card -->
+                <div class="relative overflow-hidden rounded-[2rem] border border-slate-200/70 bg-white p-7 shadow-[0_20px_60px_rgba(15,23,42,0.06)] sm:p-10">
+
+                  <!-- Glow -->
+                  <div class="absolute top-0 right-0 h-40 w-40 rounded-full bg-teal-100/40 blur-3xl"></div>
+
+                  <!-- Icon -->
+                  <div class="relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 text-white shadow-xl">
+
+                    <Icon name="sparkles" />
+
+                  </div>
+
+                  <!-- Text -->
+                  <div class="relative">
+
+                    <h3 class="mt-7 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl">
+                      {item.title}
+                    </h3>
+
+                    <p class="mt-6 text-[1rem] leading-8 text-slate-600 sm:text-lg sm:leading-9">
+                      {item.description}
+                    </p>
+
+                  </div>
+
+                  <!-- Features -->
+                  <div class="relative mt-8 grid gap-4 sm:grid-cols-2">
+
+                    <div class="rounded-2xl bg-slate-50 p-5">
+
+                      <p class="text-sm font-semibold uppercase tracking-[0.14em] text-teal-700">
+                        Personalized Care
+                      </p>
+
+                      <p class="mt-2 text-sm leading-7 text-slate-600">
+                        Treatments tailored for comfort and long-term oral health.
+                      </p>
+
+                    </div>
+
+                    <div class="rounded-2xl bg-slate-50 p-5">
+
+                      <p class="text-sm font-semibold uppercase tracking-[0.14em] text-teal-700">
+                        Modern Dentistry
+                      </p>
+
+                      <p class="mt-2 text-sm leading-7 text-slate-600">
+                        Advanced equipment and precise digital technology.
+                      </p>
+
+                    </div>
+
+                  </div>
+
+                  <!-- CTA -->
+                  <div class="relative mt-10">
+
+                    <Button
+                      href={tertiaryCTA.href}
+                      variant="primary"
+                      className="group inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-teal-600 to-cyan-500 px-7 py-4 text-sm font-semibold shadow-[0_20px_50px_rgba(13,148,136,0.28)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_25px_60px_rgba(13,148,136,0.38)] sm:px-8 sm:text-base"
+                    >
+
+                      {tertiaryCTA.text}
+
+                      <span class="transition duration-300 group-hover:translate-x-1">
+                        <Icon name="chevronRight" />
+                      </span>
+
+                    </Button>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          ))
+        }
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
