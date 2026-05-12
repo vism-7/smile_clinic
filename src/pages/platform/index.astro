@@ -1,7 +1,6 @@
 ---
 export const prerender = true;
 import BaseLayout from '@layout/BaseLayout.astro';
-import Diagram from '@common/Diagram.astro';
 import Icon from '@ui/icons/Icon.astro';
 import type { WithContext, Thing } from 'schema-dts';
 import { Image } from 'astro:assets';
@@ -179,7 +178,7 @@ const schema: WithContext<Thing> = {
       <div
         class="relative flex flex-col items-center justify-center gap-8 rounded-xl p-6 md:flex-row lg:gap-16"
       >
-        <Diagram />
+        
       </div>
     </div>
   </section>
