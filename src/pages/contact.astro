@@ -307,39 +307,30 @@ const schema: WithContext<Thing> = {
     const selectedService = document.getElementById('selected-service');
     const serviceInput = document.getElementById('service');
     const dropdownIcon = document.getElementById('dropdown-icon');
-    const options = document.querySelectorAll('.service-option');
     const form = document.getElementById('appointment-form');
 
-    if (!dropdownButton || !dropdownMenu) return;
+    if (!dropdownButton || !dropdownMenu || dropdownButton.dataset.initialized) {
+      return;
+    }
 
-    // remove old listeners by cloning button
-    const newDropdownButton = dropdownButton.cloneNode(true);
-    dropdownButton.parentNode.replaceChild(newDropdownButton, dropdownButton);
+    dropdownButton.dataset.initialized = 'true';
 
-    const freshButton = document.getElementById('dropdown-button');
-
-    freshButton?.addEventListener('click', () => {
+    // toggle dropdown
+    dropdownButton.addEventListener('click', () => {
       dropdownMenu.classList.toggle('hidden');
       dropdownIcon?.classList.toggle('rotate-180');
     });
 
-    options.forEach((option) => {
+    // service selection
+    document.querySelectorAll('.service-option').forEach((option) => {
       option.addEventListener('click', () => {
         const value = option.getAttribute('data-value');
 
-        options.forEach((item) => {
-          item.classList.remove(
-            'bg-teal-100',
-            'text-teal-700',
-            'font-medium'
-          );
+        document.querySelectorAll('.service-option').forEach((item) => {
+          item.classList.remove('bg-teal-100', 'text-teal-700', 'font-medium');
         });
 
-        option.classList.add(
-          'bg-teal-100',
-          'text-teal-700',
-          'font-medium'
-        );
+        option.classList.add('bg-teal-100', 'text-teal-700', 'font-medium');
 
         if (value && selectedService && serviceInput) {
           selectedService.textContent = value;
@@ -353,61 +344,64 @@ const schema: WithContext<Thing> = {
       });
     });
 
+    // close on outside click
     document.addEventListener('click', (event) => {
       const dropdown = document.getElementById('service-dropdown');
 
-      if (
-        dropdown &&
-        !dropdown.contains(event.target)
-      ) {
+      if (dropdown && !dropdown.contains(event.target)) {
         dropdownMenu.classList.add('hidden');
         dropdownIcon?.classList.remove('rotate-180');
       }
     });
 
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
+    // form submit
+    if (form && !form.dataset.initialized) {
+      form.dataset.initialized = 'true';
 
-      const name = document.getElementById('name')?.value || '';
-      const email = document.getElementById('email')?.value || '';
-      const phone = document.getElementById('phone')?.value || '';
-      const service = document.getElementById('service')?.value || '';
-      const message = document.getElementById('message')?.value || '';
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-      const scriptURL =
-        'https://script.google.com/macros/s/AKfycbxexGePL35h41sTol11ZcbDH0YuOm4qCCETHjjTZ9AcntC5JUbtFGJ_prQ6rUXcWTSg/exec';
+        const name = document.getElementById('name')?.value || '';
+        const email = document.getElementById('email')?.value || '';
+        const phone = document.getElementById('phone')?.value || '';
+        const service = document.getElementById('service')?.value || '';
+        const message = document.getElementById('message')?.value || '';
 
-      try {
-        await fetch(scriptURL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            phone,
-            service,
-            message,
-            date: new Date().toLocaleString(),
-          }),
-        });
+        const scriptURL =
+          'https://script.google.com/macros/s/AKfycbxexGePL35h41sTol11ZcbDH0YuOm4qCCETHjjTZ9AcntC5JUbtFGJ_prQ6rUXcWTSg/exec';
 
-        const whatsappMessage =
-          `New Appointment Booking:%0A%0A` +
-          `Name: ${name}%0A` +
-          `Email: ${email}%0A` +
-          `Phone: ${phone}%0A` +
-          `Service: ${service}%0A` +
-          `Message: ${message}`;
+        try {
+          await fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              phone,
+              service,
+              message,
+              date: new Date().toLocaleString(),
+            }),
+          });
 
-        window.location.href =
-          `https://wa.me/919813631798?text=${whatsappMessage}`;
-      } catch (error) {
-        alert('Something went wrong. Please try again.');
-      }
-    });
+          const whatsappMessage =
+            `New Appointment Booking:%0A%0A` +
+            `Name: ${name}%0A` +
+            `Email: ${email}%0A` +
+            `Phone: ${phone}%0A` +
+            `Service: ${service}%0A` +
+            `Message: ${message}`;
+
+          window.location.href =
+            `https://wa.me/919813631798?text=${whatsappMessage}`;
+        } catch (error) {
+          alert('Something went wrong. Please try again.');
+        }
+      });
+    }
   }
 
   document.addEventListener('DOMContentLoaded', initContactForm);
