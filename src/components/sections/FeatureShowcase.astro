@@ -7,6 +7,8 @@ import image_3 from '@images/dashboard.webp';
 
 import consultation from '@images/consultent.webp';
 import doctor from '@images/doctor-2.webp';
+import smile from '@images/smile.webp';
+import cleaning from '@images/cleaning1.webp';
 
 const title = `Advanced Dental Care for Every Smile`;
 
@@ -35,6 +37,40 @@ const services = [
       'Fast and reliable same-day dental care for toothaches, chipped teeth, infections, and urgent dental emergencies.',
     image: image_3,
     badge: 'Same-Day Support',
+  },
+];
+
+const results = [
+  {
+    before: consultation,
+    after: smile,
+    title: 'Smile Transformation',
+    description:
+      'Professional cosmetic treatment designed for brighter, more confident smiles.',
+  },
+
+  {
+    before: cleaning,
+    after: doctor,
+    title: 'Restorative Care',
+    description:
+      'Modern restorative dentistry focused on comfort, precision, and natural-looking results.',
+  },
+
+  {
+    before: image_1,
+    after: image_2,
+    title: 'Teeth Whitening',
+    description:
+      'Advanced whitening treatments designed to remove stains and restore a naturally radiant smile.',
+  },
+
+  {
+    before: image_3,
+    after: consultation,
+    title: 'Complete Smile Makeover',
+    description:
+      'Customized smile enhancement treatments focused on aesthetics, confidence, and long-term oral health.',
   },
 ];
 ---
@@ -68,7 +104,12 @@ const services = [
     </div>
 
     <!-- MOBILE SLIDER -->
-    <div class="mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] lg:hidden [&::-webkit-scrollbar]:hidden">
+    <div
+      class="mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-5 lg:hidden
+      [scrollbar-width:none]
+      [-ms-overflow-style:none]
+      [&::-webkit-scrollbar]:hidden"
+    >
 
       {
         services.map((service) => (
@@ -217,157 +258,174 @@ const services = [
 
     </div>
 
-    <!-- PREMIUM BOTTOM SECTION -->
-    <div class="mt-20 overflow-hidden rounded-[2.8rem] border border-white/60 bg-white/70 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-2xl lg:mt-28">
+    <!-- BEFORE / AFTER RESULTS -->
+    <div class="panel mt-24">
 
-      <div class="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+      <!-- Heading -->
+      <div class="mx-auto max-w-3xl text-center">
 
-        <!-- LEFT CONTENT -->
-        <div class="relative px-6 py-10 sm:px-10 sm:py-14 lg:px-14 lg:py-16">
+        <span class="inline-flex items-center rounded-full border border-teal-200 bg-white/80 px-5 py-2 text-xs font-semibold tracking-[0.15em] text-teal-700 shadow-lg backdrop-blur-xl sm:text-sm">
+          REAL RESULTS
+        </span>
 
-          <!-- Glow -->
-          <div class="absolute top-0 right-0 h-60 w-60 rounded-full bg-teal-100/40 blur-3xl"></div>
+        <h3 class="mt-6 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+          Before & After
+          <br />
+          Smile Transformations
+        </h3>
 
-          <span class="relative inline-flex items-center rounded-full border border-teal-200 bg-teal-50 px-4 py-2 text-xs font-semibold tracking-[0.15em] text-teal-700 shadow-sm sm:text-sm">
-            COMFORT • TECHNOLOGY • CARE
-          </span>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600">
+          Natural-looking results designed to improve confidence,
+          comfort, and long-term dental health.
+        </p>
 
-          <h3 class="relative mt-6 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl lg:text-5xl">
-            Designed Around
-            <br />
-            Your Comfort
-          </h3>
+      </div>
 
-          <p class="relative mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg sm:leading-9">
-            Every detail inside SmileClinic is thoughtfully designed to create
-            a calm, modern, and stress-free dental experience — from digital
-            diagnostics to personalized patient care.
-          </p>
+      <!-- MOBILE PREMIUM SCROLL -->
+      <div
+        class="mt-14 flex gap-5 overflow-x-auto pb-6 lg:hidden
+        snap-x snap-mandatory
+        scrollbar-thin
+        scrollbar-track-transparent
+        scrollbar-thumb-teal-200"
+      >
 
-          <!-- Features -->
-          <div class="relative mt-8 grid gap-4 sm:grid-cols-2">
+        {
+          results.map((item) => (
 
-            <div class="rounded-2xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur-xl">
+            <div class="min-w-[92%] snap-center overflow-hidden rounded-[2.5rem] border border-white/60 bg-white/80 shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur-2xl">
 
-              <p class="text-sm font-semibold tracking-[0.15em] text-teal-700">
-                MODERN EQUIPMENT
-              </p>
+              <!-- Images -->
+              <div class="grid grid-cols-2 gap-2 p-2">
 
-              <p class="mt-3 leading-7 text-slate-600">
-                Advanced technology for precise and comfortable treatments.
-              </p>
+                <!-- Before -->
+                <div class="relative overflow-hidden rounded-[1.8rem]">
 
-            </div>
+                  <Image
+                    src={item.before}
+                    alt="Before"
+                    class="h-72 w-full object-cover"
+                  />
 
-            <div class="rounded-2xl border border-slate-200/70 bg-white/80 p-5 shadow-sm backdrop-blur-xl">
+                  <div class="absolute left-4 top-4 rounded-full bg-slate-900/70 px-4 py-2 text-xs font-semibold tracking-[0.15em] text-white backdrop-blur-xl">
+                    BEFORE
+                  </div>
 
-              <p class="text-sm font-semibold tracking-[0.15em] text-teal-700">
-                RELAXING ENVIRONMENT
-              </p>
+                </div>
 
-              <p class="mt-3 leading-7 text-slate-600">
-                A welcoming clinic atmosphere designed to reduce anxiety.
-              </p>
+                <!-- After -->
+                <div class="relative overflow-hidden rounded-[1.8rem]">
 
-            </div>
+                  <Image
+                    src={item.after}
+                    alt="After"
+                    class="h-72 w-full object-cover"
+                  />
 
-          </div>
+                  <div class="absolute left-4 top-4 rounded-full bg-teal-600/90 px-4 py-2 text-xs font-semibold tracking-[0.15em] text-white backdrop-blur-xl">
+                    AFTER
+                  </div>
 
-          <!-- CTA -->
-          <a
-            href="/contact"
-            class="relative mt-10 inline-flex items-center gap-3 rounded-2xl bg-teal-600 px-7 py-4 text-base font-semibold text-white shadow-xl transition duration-300 hover:-translate-y-1 hover:bg-teal-500"
-          >
-            Book Appointment
+                </div>
 
-            <span class="flex h-10 w-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-xl">
-              →
-            </span>
+              </div>
 
-          </a>
+              <!-- Content -->
+              <div class="p-6 pt-3">
 
-        </div>
-
-        <!-- RIGHT IMAGES -->
-        <div class="relative h-full p-6 sm:p-8 lg:p-10">
-
-          <div class="grid h-full gap-5 sm:grid-cols-2">
-
-            <!-- Large Image -->
-            <div class="group relative overflow-hidden rounded-[2rem] sm:col-span-2">
-
-              <Image
-                src={consultation}
-                alt="Dental Consultation"
-                class="h-[280px] w-full object-cover transition duration-700 group-hover:scale-105 sm:h-[340px]"
-              />
-
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/10 to-transparent"></div>
-
-              <div class="absolute bottom-6 left-6 right-6">
-
-                <p class="text-sm font-medium tracking-[0.15em] text-white/70">
-                  PERSONALIZED CARE
-                </p>
-
-                <h4 class="mt-2 text-2xl font-bold text-white">
-                  Comfortable Modern Dentistry
+                <h4 class="text-2xl font-bold text-slate-900">
+                  {item.title}
                 </h4>
+
+                <p class="mt-4 leading-8 text-slate-600">
+                  {item.description}
+                </p>
 
               </div>
 
             </div>
 
-            <!-- Small Image -->
-<!-- Small Image -->
-<div class="group relative overflow-hidden rounded-[2rem] border border-white/50 shadow-lg">
+          ))
+        }
 
-  <Image
-    src={doctor}
-    alt="Dental Team"
-    class="h-56 w-full object-cover object-center transition duration-700 group-hover:scale-105"
-  />
+      </div>
 
-  <!-- Soft overlay -->
-  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/65 via-slate-900/10 to-transparent"></div>
+      <!-- DESKTOP RESULTS -->
+      <div class="mt-16 hidden gap-8 lg:grid lg:grid-cols-2">
 
-  <!-- Bottom glass content -->
-  <div class="absolute inset-x-4 bottom-4 rounded-2xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur-xl">
+        {
+          results.map((item, index) => (
 
-    <p class="text-xs font-medium tracking-[0.18em] text-white/70">
-      DENTAL EXPERTS
-    </p>
+            <div
+              class={`overflow-hidden rounded-[2.8rem] border border-white/60 bg-white/70 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-2xl ${
+                index === 1 ? 'lg:mt-14' : ''
+              }`}
+            >
 
-    <h4 class="mt-1 text-lg font-semibold text-white">
-      Friendly Specialists
-    </h4>
+              <!-- Images -->
+              <div class="grid grid-cols-2 gap-3 p-3">
 
-  </div>
+                <!-- Before -->
+                <div class="group relative overflow-hidden rounded-[2rem]">
 
-</div>
+                  <Image
+                    src={item.before}
+                    alt="Before Result"
+                    class="h-[420px] w-full object-cover transition duration-700 group-hover:scale-105"
+                  />
 
-            <!-- Small Card -->
-            <div class="flex flex-col justify-center rounded-[2rem] border border-white/60 bg-gradient-to-br from-teal-500 to-cyan-500 p-6 text-white shadow-xl">
+                  <div class="absolute left-5 top-5 rounded-full bg-slate-900/70 px-5 py-2 text-sm font-semibold tracking-[0.15em] text-white backdrop-blur-xl">
+                    BEFORE
+                  </div>
 
-              <p class="text-sm font-semibold tracking-[0.15em] text-white/70">
-                PREMIUM EXPERIENCE
-              </p>
+                </div>
 
-              <h4 class="mt-4 text-2xl font-bold leading-tight">
-                Gentle Care
-                <br />
-                For Every Patient
-              </h4>
+                <!-- After -->
+                <div class="group relative overflow-hidden rounded-[2rem]">
 
-              <p class="mt-4 leading-7 text-white/80">
-                Combining expertise, technology, and compassion for healthier smiles.
-              </p>
+                  <Image
+                    src={item.after}
+                    alt="After Result"
+                    class="h-[420px] w-full object-cover transition duration-700 group-hover:scale-105"
+                  />
+
+                  <div class="absolute left-5 top-5 rounded-full bg-teal-600/90 px-5 py-2 text-sm font-semibold tracking-[0.15em] text-white backdrop-blur-xl">
+                    AFTER
+                  </div>
+
+                </div>
+
+              </div>
+
+              <!-- Content -->
+              <div class="px-8 pb-8 pt-4">
+
+                <div class="flex items-center justify-between">
+
+                  <div>
+
+                    <h4 class="text-3xl font-bold text-slate-900">
+                      {item.title}
+                    </h4>
+
+                    <p class="mt-4 max-w-xl text-lg leading-8 text-slate-600">
+                      {item.description}
+                    </p>
+
+                  </div>
+
+                  <div class="hidden h-14 w-14 items-center justify-center rounded-full bg-teal-50 text-2xl text-teal-700 lg:flex">
+                    ✨
+                  </div>
+
+                </div>
+
+              </div>
 
             </div>
 
-          </div>
-
-        </div>
+          ))
+        }
 
       </div>
 
