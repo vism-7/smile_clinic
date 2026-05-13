@@ -266,7 +266,7 @@ The `MegaMenu/*.astro` components generate the mega menu. For example, the downl
 
 ```astro
 ---
-import { downloadsMenu } from '@utils/megaMenu/downloads';
+// import { downloadsMenu } from '@utils/megaMenu/downloads';
 const currentPath = Astro.url.pathname;
 ---
 
@@ -349,9 +349,9 @@ The expanded footer includes detailed navigation links and an alternative subscr
 import FooterFormExpanded from '@ui/forms/FooterFormExpanded.astro';
 
 // Import data for dynamic rendering
-import { featuresMenu } from '@utils/megaMenu/features';
-import { platformMenu } from '@utils/megaMenu/platform';
-import { supportMenu } from '@utils/megaMenu/support';
+// import { featuresMenu } from '@utils/megaMenu/features';
+// import { platformMenu } from '@utils/megaMenu/platform';
+// import { supportMenu } from '@utils/megaMenu/support';
 ---
 ```
 

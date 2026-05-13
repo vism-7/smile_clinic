@@ -7,7 +7,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@common/*": ["src/components/common/*"],
-      "@megaMenu/*": ["src/components/common/MegaMenu/*"],
+      
       "@images/*": ["src/assets/images/*"],
       "@layout/*": ["src/layout/*"],
       "@ui/*": ["src/components/ui/*"],
