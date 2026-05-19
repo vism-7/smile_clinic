@@ -8,46 +8,120 @@ const formStrings = {
 };
 ---
 
-<form>
-  {/* Fieldset for grouping form elements */}
-  <fieldset
-    class="mt-4 flex flex-col items-center gap-2 rounded-lg bg-teal-400 p-2 sm:flex-row sm:gap-3"
-    aria-labelledby="form-legend"
-  >
-    {/* Visible legend for screen readers */}
-    <legend id="form-legend" class="sr-only text-lg font-medium text-slate-700"
-      >{formStrings.legend}</legend
+<div class="w-full">
+  <form id="footer-info-form" data-astro-reload>
+    {/* Fieldset for grouping form elements */}
+    <fieldset
+      class="mt-4 flex flex-col items-center gap-2 rounded-lg bg-teal-400 p-2 sm:flex-row sm:gap-3"
+      aria-labelledby="form-legend"
     >
+      {/* Visible legend for screen readers */}
+      <legend id="form-legend" class="sr-only text-lg font-medium text-slate-700"
+        >{formStrings.legend}</legend
+      >
 
-    {/* Email input */}
-    <div class="w-full">
-      <label for="email-input" class="sr-only">{formStrings.placeholder}</label>
-      <input
-        type="email"
-        id="email-input"
-        name="email"
-        class="block w-full rounded-lg border-transparent px-4 py-3 text-sm focus:border-teal-700/80 focus:ring-teal-700/80"
-        placeholder={formStrings.placeholder}
-        required
-        aria-label={formStrings.placeholder}
-        aria-describedby="form-description"
-        autocomplete="email"
-        spellcheck="false"
-      />
-    </div>
+      {/* Email input */}
+      <div class="w-full">
+        <label for="email-input" class="sr-only">{formStrings.placeholder}</label>
+        <input
+          type="email"
+          id="email-input"
+          name="user_email"
+          class="block w-full rounded-lg border-transparent px-4 py-3 text-sm text-slate-800 focus:border-teal-700/80 focus:ring-teal-700/80 outline-hidden"
+          placeholder={formStrings.placeholder}
+          required
+          aria-label={formStrings.placeholder}
+          aria-describedby="form-description"
+          autocomplete="email"
+          spellcheck="false"
+        />
+      </div>
 
-    {/* Submit button */}
-    <button
-      type="submit"
-      class="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-teal-100 p-3 text-sm font-medium whitespace-nowrap text-slate-700 transition duration-300 hover:bg-teal-700/80 hover:text-white focus:bg-teal-700 focus:text-white focus:outline-hidden sm:w-auto"
-      aria-label="Submit email"
-    >
-      {formStrings.submit}
-    </button>
-  </fieldset>
+      {/* Submit button */}
+      <button
+        type="submit"
+        id="form-submit-btn"
+        class="inline-flex w-full items-center justify-center gap-x-2 rounded-lg border border-transparent bg-teal-100 p-3 text-sm font-medium whitespace-nowrap text-slate-700 transition duration-300 hover:bg-teal-700/80 hover:text-white focus:bg-teal-700 focus:text-white focus:outline-hidden sm:w-auto disabled:opacity-50"
+        aria-label="Submit email"
+      >
+        {formStrings.submit}
+      </button>
+    </fieldset>
 
-  {/* Description paragraph with ARIA association */}
-  <p id="form-description" class="mt-3 text-sm text-slate-400">
-    {formStrings.description}
-  </p>
-</form>
+    {/* Description paragraph with ARIA association / Displays status states dynamically */}
+    <p id="form-description" class="mt-3 text-sm text-slate-400 transition-all duration-200">
+      {formStrings.description}
+    </p>
+  </form>
+</div>
+
+<script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  declare const emailjs: any;
+
+  function initEmailJSForm() {
+    const form = document.getElementById('footer-info-form') as HTMLFormElement;
+    const descriptionText = document.getElementById('form-description');
+    const submitBtn = document.getElementById('form-submit-btn') as HTMLButtonElement;
+    const defaultText = "Get all the information you need. Enter your email, and we'll be in touch.";
+
+    // Guard clause to make sure elements exist on the current page view
+    if (!form || !descriptionText || !submitBtn) return;
+
+    // Safety precaution: check if SDK loaded from CDN correctly
+    if (typeof emailjs === 'undefined') {
+      console.error("EmailJS SDK failed to load from CDN resource.");
+      return;
+    }
+
+    // 1. Initialize with your specific EmailJS Public Key
+    emailjs.init({
+      publicKey: "tnpipl8lTkHalepao",
+    });
+
+    // Remove any previous event listener clones to prevent multi-triggering bug
+    form.onsubmit = null; 
+
+    // Directly bind submission handler to ensure absolute event interception
+    form.onsubmit = function(e) {
+      e.preventDefault(); // 🛑 Hard stop browser redirect behavior instantly
+      e.stopPropagation();
+
+      // ⏳ Set UI Visual Loading Feedback
+      submitBtn.disabled = true;
+      descriptionText.textContent = "Sending your information guide...";
+      descriptionText.className = "mt-3 text-sm text-teal-600 font-medium animate-pulse";
+
+      // 2. Transmit Form data variables to EmailJS Dashboard Engine
+      emailjs.sendForm('service_14k7er2', 'template_r232nlm', form)
+      .then(() => {
+        // 🎉 Success UI update handling step
+        descriptionText.textContent = "✨ Information guide sent! Check your inbox.";
+        descriptionText.className = "mt-3 text-sm text-emerald-600 font-semibold";
+        form.reset();
+
+        // Gracefully clean state notification back to baseline description after delay
+        setTimeout(() => {
+          if (descriptionText.className.includes('text-emerald-600')) {
+            descriptionText.textContent = defaultText;
+            descriptionText.className = "mt-3 text-sm text-slate-400";
+          }
+        }, 6000);
+      })
+      .catch((error: any) => {
+        console.error('EmailJS Transport Failure:', error);
+        // ❌ Error feedback state update step
+        descriptionText.textContent = "Transmission failed. Please check connection and try again.";
+        descriptionText.className = "mt-3 text-sm text-rose-500 font-medium";
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+      });
+    };
+  }
+
+  // Self-execute lifecycle instantly on mounting and listen to Astro dynamic page swap steps
+  initEmailJSForm();
+  document.addEventListener('astro:page-load', initEmailJSForm);
+</script>

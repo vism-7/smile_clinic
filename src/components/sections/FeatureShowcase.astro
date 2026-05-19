@@ -87,7 +87,7 @@ const results = [
   <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
     <!-- Heading -->
-    <div class="mx-auto max-w-4xl text-center">
+    <div class="reveal-up mx-auto max-w-4xl text-center">
 
       <span class="inline-flex items-center rounded-full border border-teal-200/70 bg-white/80 px-4 py-2 text-xs font-semibold tracking-[0.15em] text-teal-700 shadow-lg backdrop-blur-xl sm:px-5 sm:text-sm">
         Premium Dental Services
@@ -105,7 +105,7 @@ const results = [
 
     <!-- MOBILE SLIDER -->
     <div
-      class="mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-5 lg:hidden
+      class="reveal-up mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-5 lg:hidden
       [scrollbar-width:none]
       [-ms-overflow-style:none]
       [&::-webkit-scrollbar]:hidden"
@@ -182,7 +182,7 @@ const results = [
     </div>
 
     <!-- DESKTOP GRID -->
-    <div class="mt-24 hidden gap-8 lg:grid lg:grid-cols-3">
+    <div class="reveal-up mt-24 hidden gap-8 lg:grid lg:grid-cols-3">
 
       {
         services.map((service, index) => (
@@ -262,7 +262,7 @@ const results = [
     <div class="panel mt-24">
 
       <!-- Heading -->
-      <div class="mx-auto max-w-3xl text-center">
+      <div class="reveal-up mx-auto max-w-3xl text-center">
 
         <span class="inline-flex items-center rounded-full border border-teal-200 bg-white/80 px-5 py-2 text-xs font-semibold tracking-[0.15em] text-teal-700 shadow-lg backdrop-blur-xl sm:text-sm">
           REAL RESULTS
@@ -351,13 +351,13 @@ const results = [
       </div>
 
       <!-- DESKTOP RESULTS -->
-      <div class="mt-16 hidden gap-8 lg:grid lg:grid-cols-2">
+      <div class="reveal-up mt-16 hidden gap-8 lg:grid lg:grid-cols-2">
 
         {
           results.map((item, index) => (
 
             <div
-              class={`overflow-hidden rounded-[2.8rem] border border-white/60 bg-white/70 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-2xl ${
+              class={`reveal-up overflow-hidden rounded-[2.8rem] border border-white/60 bg-white/70 shadow-[0_20px_80px_rgba(15,23,42,0.08)] backdrop-blur-2xl ${
                 index === 1 ? 'lg:mt-14' : ''
               }`}
             >

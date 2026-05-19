@@ -95,3 +95,77 @@
 @utility card {
   @apply relative z-10 flex h-full flex-col border-dashed border-slate-300 p-4 before:absolute before:inset-0 before:-z-1 before:bg-linear-to-b/oklch before:via-80% before:opacity-0 hover:before:from-transparent hover:before:via-transparent hover:before:to-teal-500/20 hover:before:opacity-100 focus:outline-hidden focus:before:from-transparent focus:before:via-transparent focus:before:to-teal-500/20 focus:before:opacity-100 md:p-6;
 }
+
+/* LENIS */
+
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth body {
+  overflow-x: hidden;
+}
+
+/* BETTER RENDERING */
+
+.panel,
+.reveal-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  position: relative;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.7s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(root) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+    filter: blur(8px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}

@@ -13,10 +13,12 @@ import 'aos/dist/aos.css';
 interface Props {
   seo?: SEOProps; // Optional SEO properties to customize meta tags
   schema?: WithContext<Thing>; // Optional schema.org properties for structured data
+  hideNav?: boolean;
+  hideFooter?: boolean;
 }
 
 // Extract `seo` and `schema` from properties or define defaults
-const { seo, schema } = Astro.props;
+const { seo, schema, hideNav = false, hideFooter = false } = Astro.props;
 const socialImage = `${Astro.site}social.png`; // Path to the default social sharing image
 
 const ogTitle = seo?.title ?? 'DataNova - Unlock Insights from Your Excel Data';
@@ -85,7 +87,7 @@ const defaultSchema: WithContext<Thing> = {
     <Schema item={schema ?? defaultSchema} />
 
     {/* Client-Side Router for page transitions */}
-    <ClientRouter />
+    <ClientRouter fallback="swap" />
 
     {/* Font Definitions */}
     <AstroFont
@@ -129,12 +131,12 @@ const defaultSchema: WithContext<Thing> = {
   
 
   <body class="bg-off-white selection:bg-teal-400 selection:text-slate-700">
-    <Navbar />
+    {!hideNav && <Navbar />}
 
     <main>
       <slot />
     </main>
 
-    <Footer />
+    {!hideFooter && <Footer />}
   </body>
 </html>

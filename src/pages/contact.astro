@@ -28,7 +28,6 @@ const schema: WithContext<Thing> = {
   <section
     class="panel relative overflow-hidden bg-gradient-to-b from-white via-teal-50/40 to-white"
   >
-    <!-- Background glow -->
     <div
       class="absolute top-0 left-0 h-96 w-96 rounded-full bg-teal-200/30 blur-3xl"
     >
@@ -39,7 +38,6 @@ const schema: WithContext<Thing> = {
     </div>
 
     <div class="relative mx-auto max-w-7xl px-4 pt-40 pb-24 sm:px-6 lg:px-8">
-      <!-- Heading -->
       <div class="mx-auto max-w-4xl text-center">
         <span
           class="inline-flex items-center rounded-full border border-teal-200 bg-teal-50 px-5 py-2 text-sm font-medium text-teal-700 shadow-sm"
@@ -60,13 +58,10 @@ const schema: WithContext<Thing> = {
         </p>
       </div>
 
-      <!-- MAIN GRID -->
       <div class="mt-24 grid gap-8 lg:grid-cols-[1.25fr_0.75fr]">
-        <!-- LEFT COLUMN -->
         <div class="grid gap-8">
-          <!-- FORM -->
           <div
-            class="rounded-[2.8rem] border border-white/50 bg-white/70 p-3 shadow-[0_25px_80px_rgba(15,23,42,0.10)] backdrop-blur-2xl"
+            class="reveal-up relative rounded-[2.8rem] border border-white/50 bg-white/70 p-3 shadow-[0_25px_80px_rgba(15,23,42,0.10)] backdrop-blur-2xl"
           >
             <div
               class="rounded-[2.2rem] bg-gradient-to-br from-teal-600 via-teal-500 to-cyan-500 p-8 md:p-14"
@@ -91,6 +86,7 @@ const schema: WithContext<Thing> = {
               <form id="appointment-form" class="grid gap-6">
                 <input
                   id="name"
+                  name="name"
                   type="text"
                   required
                   placeholder="Full Name"
@@ -99,6 +95,7 @@ const schema: WithContext<Thing> = {
 
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   required
                   placeholder="Email Address"
@@ -107,13 +104,12 @@ const schema: WithContext<Thing> = {
 
                 <input
                   id="phone"
+                  name="phone"
                   type="tel"
                   placeholder="Phone Number"
                   class="w-full rounded-2xl border border-white/15 bg-white/10 px-5 py-4 text-white transition-all duration-300 outline-none placeholder:text-white/60 focus:border-white/40 focus:ring-0 focus:outline-none"
                 />
 
-                <!-- PREMIUM SELECT -->
-                <!-- CUSTOM SERVICE DROPDOWN -->
                 <div class="relative" id="service-dropdown">
                   <button
                     type="button"
@@ -141,6 +137,13 @@ const schema: WithContext<Thing> = {
                   </button>
 
                   <input type="hidden" id="service" name="service" />
+
+                  <p
+                    id="service-error"
+                    class="mt-2 hidden text-sm font-medium text-red-200"
+                  >
+                    Please select a service
+                  </p>
 
                   <div
                     id="dropdown-menu"
@@ -190,6 +193,7 @@ const schema: WithContext<Thing> = {
 
                 <textarea
                   id="message"
+                  name="message"
                   rows="4"
                   placeholder="Additional Notes"
                   class="w-full rounded-2xl border border-white/15 bg-white/10 px-5 py-4 text-white transition-all duration-300 outline-none placeholder:text-white/60 focus:border-white/40 focus:ring-0 focus:outline-none"
@@ -199,15 +203,29 @@ const schema: WithContext<Thing> = {
                   type="submit"
                   class="mt-2 rounded-2xl bg-white px-8 py-4 text-lg font-semibold text-teal-700 transition duration-300 hover:-translate-y-1 hover:bg-slate-100 hover:shadow-xl"
                 >
-                  Continue to Booking
+                  Book Appointment
                 </button>
+
+                <div
+                  id="loading-overlay"
+                  class="absolute inset-0 z-50 flex hidden flex-col items-center justify-center rounded-[2.2rem] bg-black/40 backdrop-blur-xl"
+                >
+                  <div
+                    class="h-14 w-14 animate-spin rounded-full border-2 border-white/20 border-t-white"
+                  >
+                  </div>
+                  <p
+                    class="mt-6 text-sm tracking-[0.25em] text-white/80 uppercase"
+                  >
+                    Booking Appointment
+                  </p>
+                </div>
               </form>
             </div>
           </div>
 
-          <!-- APPOINTMENT CARD -->
           <div
-            class="group overflow-hidden rounded-[2.8rem] border border-white/60 bg-white/80 shadow-xl backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
+            class="reveal-up group overflow-hidden rounded-[2.8rem] border border-white/60 bg-white/80 shadow-xl backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
           >
             <div class="grid md:grid-cols-2">
               <div class="overflow-hidden">
@@ -238,8 +256,7 @@ const schema: WithContext<Thing> = {
           </div>
         </div>
 
-        <!-- RIGHT COLUMN -->
-        <div class="grid gap-6">
+        <div class="reveal-up grid gap-6">
           <div
             class="group overflow-hidden rounded-[2rem] bg-white/80 shadow-xl backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
           >
@@ -259,7 +276,7 @@ const schema: WithContext<Thing> = {
           </div>
 
           <div
-            class="group overflow-hidden rounded-[2rem] bg-white/80 shadow-xl backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
+            class="reveal-up group overflow-hidden rounded-[2rem] bg-white/80 shadow-xl backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
           >
             <div class="overflow-hidden">
               <Image
@@ -280,7 +297,7 @@ const schema: WithContext<Thing> = {
           </div>
 
           <div
-            class="group overflow-hidden rounded-[2rem] bg-white/80 shadow-xl backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
+            class="reveal-up group overflow-hidden rounded-[2rem] bg-white/80 shadow-xl backdrop-blur-xl transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
           >
             <div class="overflow-hidden">
               <Image
@@ -302,8 +319,7 @@ const schema: WithContext<Thing> = {
         </div>
       </div>
 
-      <!-- TRUST STRIP -->
-      <div class="mt-20 grid gap-4 md:grid-cols-3">
+      <div class="reveal-up mt-20 grid gap-4 md:grid-cols-3">
         <div
           class="rounded-2xl bg-white/80 px-6 py-5 text-center shadow-lg backdrop-blur-xl transition hover:-translate-y-1"
         >
@@ -325,17 +341,52 @@ const schema: WithContext<Thing> = {
     </div>
   </section>
 
-  <style>
-    select option {
-      color: #0f172a;
-      background: white;
+  <style is:global>
+    @keyframes shake {
+      0%,
+      100% {
+        transform: translateX(0);
+      }
+      25% {
+        transform: translateX(-6px);
+      }
+      50% {
+        transform: translateX(6px);
+      }
+      75% {
+        transform: translateX(-4px);
+      }
     }
 
-    select:focus,
+    .shake {
+      animation: shake 0.35s ease;
+    }
+
+    .input-valid {
+      border-color: rgba(34, 197, 94, 0.7) !important;
+      background: rgba(34, 197, 94, 0.05) !important;
+    }
+
+    .input-invalid {
+      border-color: rgba(239, 68, 68, 0.75) !important;
+      background: rgba(239, 68, 68, 0.05) !important;
+    }
+
+    #Loading-overlay, #loading-overlay {
+      transition: opacity 0.4s ease;
+    }
+
+    input,
+    textarea,
+    #dropdown-button {
+      transition: all 0.35s ease;
+    }
+
     input:focus,
-    textarea:focus {
-      outline: none !important;
-      box-shadow: none !important;
+    textarea:focus,
+    #dropdown-button:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
     }
   </style>
 
@@ -352,38 +403,29 @@ const schema: WithContext<Thing> = {
         !dropdownButton ||
         !dropdownMenu ||
         dropdownButton.dataset.initialized
-      ) {
+      )
         return;
-      }
 
       dropdownButton.dataset.initialized = 'true';
 
-      // toggle dropdown
+      // dropdown toggle
       dropdownButton.addEventListener('click', () => {
         dropdownMenu.classList.toggle('hidden');
         dropdownIcon?.classList.toggle('rotate-180');
       });
 
-      // service selection
+      // dropdown select
       document.querySelectorAll('.service-option').forEach(option => {
         option.addEventListener('click', () => {
           const value = option.getAttribute('data-value');
-
-          document.querySelectorAll('.service-option').forEach(item => {
-            item.classList.remove(
-              'bg-teal-100',
-              'text-teal-700',
-              'font-medium'
-            );
-          });
-
-          option.classList.add('bg-teal-100', 'text-teal-700', 'font-medium');
 
           if (value && selectedService && serviceInput) {
             selectedService.textContent = value;
             selectedService.classList.remove('text-white/70');
             selectedService.classList.add('text-white');
             serviceInput.value = value;
+            serviceInput.classList.remove('input-invalid');
+            serviceInput.classList.add('input-valid');
           }
 
           dropdownMenu.classList.add('hidden');
@@ -391,71 +433,152 @@ const schema: WithContext<Thing> = {
         });
       });
 
-      // close on outside click
-      document.addEventListener('click', event => {
+      // outside click close
+      document.addEventListener('click', e => {
         const dropdown = document.getElementById('service-dropdown');
-
-        if (dropdown && !dropdown.contains(event.target)) {
+        if (dropdown && !dropdown.contains(e.target)) {
           dropdownMenu.classList.add('hidden');
           dropdownIcon?.classList.remove('rotate-180');
         }
       });
 
-      // form submit
-      if (form && !form.dataset.initialized) {
-        form.dataset.initialized = 'true';
+      if (!form || form.dataset.initialized) return;
+      form.dataset.initialized = 'true';
 
-        form.addEventListener('submit', async e => {
-          e.preventDefault();
+      const inputs = [
+        document.getElementById('name'),
+        document.getElementById('email'),
+        document.getElementById('phone'),
+        document.getElementById('service'),
+        document.getElementById('message'),
+      ];
 
-          const name = document.getElementById('name')?.value || '';
-          const email = document.getElementById('email')?.value || '';
-          const phone = document.getElementById('phone')?.value || '';
-          const service = document.getElementById('service')?.value || '';
-          const message = document.getElementById('message')?.value || '';
+      const innerOverlay = document.getElementById('loading-overlay');
+      const fullOverlay = document.getElementById('Loading-overlay');
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const serviceError = document.getElementById('service-error');
 
-          const scriptURL =
-            'https://script.google.com/macros/s/AKfycbxexGePL35h41sTol11ZcbDH0YuOm4qCCETHjjTZ9AcntC5JUbtFGJ_prQ6rUXcWTSg/exec';
+      const scriptURL =
+        'https://script.google.com/macros/s/AKfycbyVcd9q-tCzMDfuMuRXraPvKgOHS5VYQlIuQdmgJvmmIa9Mr9rleNQlQnrL61mcluuOKw/exec';
 
-          try {
-  fetch(scriptURL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name,
-      email,
-      phone,
-      service,
-      message,
-      date: new Date().toLocaleString(),
-    }),
-  });
-
-  const whatsappMessage =
-    `New Appointment Booking:%0A%0A` +
-    `Name: ${name}%0A` +
-    `Email: ${email}%0A` +
-    `Phone: ${phone}%0A` +
-    `Service: ${service}%0A` +
-    `Message: ${message}`;
-
-  setTimeout(() => {
-    window.open(
-      `https://wa.me/919813631798?text=${whatsappMessage}`,
-      '_blank'
-    );
-  }, 500);
-} catch (error) {
-            alert('Something went wrong. Please try again.');
+      // live validation
+      inputs.forEach(input => {
+        if (!input) return;
+        input.addEventListener('input', () => {
+          if (input.value.trim()) {
+            input.classList.remove('input-invalid');
+            input.classList.add('input-valid');
+          } else {
+            input.classList.remove('input-valid');
           }
         });
-      }
+      });
+
+      form.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        let valid = true;
+
+        inputs.forEach(input => {
+          if (!input) return;
+          if (input.id !== 'message' && !input.value.trim()) {
+            input.classList.add('input-invalid');
+            valid = false;
+          }
+        });
+
+        if (!serviceInput.value) {
+          serviceError?.classList.remove('hidden');
+          valid = false;
+        } else {
+          serviceError?.classList.add('hidden');
+        }
+
+        if (!valid) {
+          form.classList.add('shake');
+
+          submitBtn.textContent = 'Complete all fields';
+          submitBtn.classList.add('bg-red-500', 'text-white');
+
+          setTimeout(() => {
+            form.classList.remove('shake');
+            submitBtn.textContent = 'Book Appointment';
+            submitBtn.classList.remove('bg-red-500', 'text-white');
+          }, 1600);
+
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Booking Appointment...';
+
+        innerOverlay?.classList.remove('hidden');
+        fullOverlay?.classList.remove('hidden');
+
+        // Formulating clean plain object data to match e.postData.contents expectations
+        const formData = {
+          name: inputs[0].value.trim(),
+          email: inputs[1].value.trim(),
+          phone: inputs[2].value.trim(),
+          service: inputs[3].value.trim(),
+          message: inputs[4].value.trim()
+        };
+
+        try {
+          // Sending raw text format to prevent CORS flight blockages while maintaining pure JSON layout
+          await fetch(scriptURL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'text/plain;charset=utf-8',
+            },
+            body: JSON.stringify(formData),
+          });
+
+          setTimeout(() => {
+            innerOverlay?.classList.add('opacity-0');
+            fullOverlay?.classList.add('opacity-0');
+
+            setTimeout(async () => {
+              if (document.startViewTransition) {
+                await document.startViewTransition(() => {
+                  window.location.assign('/booking-success');
+                });
+              } else {
+                window.location.assign('/booking-success');
+              }
+            }, 400);
+          }, 1200);
+        } catch (error) {
+          console.error('Data dispatch mismatch:', error);
+          innerOverlay?.classList.add('hidden');
+          fullOverlay?.classList.add('hidden');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Book Appointment';
+        }
+      });
     }
 
     document.addEventListener('DOMContentLoaded', initContactForm);
     document.addEventListener('astro:page-load', initContactForm);
   </script>
+
+  <div id="Loading-overlay" class="fixed inset-0 z-[99999] hidden">
+    <div class="absolute inset-0 bg-black/70 backdrop-blur-xl"></div>
+
+    <div
+      class="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center text-center"
+    >
+      <div
+        class="h-16 w-16 animate-spin rounded-full border-4 border-white/20 border-t-white"
+      >
+      </div>
+
+      <p
+        class="mt-6 text-sm font-semibold tracking-[0.25em] text-white uppercase"
+      >
+        Booking Appointment
+      </p>
+    </div>
+  </div>
 </BaseLayout>
