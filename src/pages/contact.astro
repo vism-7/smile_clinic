@@ -399,70 +399,62 @@ const schema: WithContext<Thing> = {
       const dropdownIcon = document.getElementById('dropdown-icon');
       const form = document.getElementById('appointment-form');
 
-      if (
-        !dropdownButton ||
-        !dropdownMenu ||
-        dropdownButton.dataset.initialized
-      )
-        return;
+      // Prevent duplicate initializations
+      if (!form || form.dataset.initialized === 'true') return;
 
-      dropdownButton.dataset.initialized = 'true';
-
-      // dropdown toggle
-      dropdownButton.addEventListener('click', () => {
-        dropdownMenu.classList.toggle('hidden');
-        dropdownIcon?.classList.toggle('rotate-180');
-      });
-
-      // dropdown select
-      document.querySelectorAll('.service-option').forEach(option => {
-        option.addEventListener('click', () => {
-          const value = option.getAttribute('data-value');
-
-          if (value && selectedService && serviceInput) {
-            selectedService.textContent = value;
-            selectedService.classList.remove('text-white/70');
-            selectedService.classList.add('text-white');
-            serviceInput.value = value;
-            serviceInput.classList.remove('input-invalid');
-            serviceInput.classList.add('input-valid');
-          }
-
-          dropdownMenu.classList.add('hidden');
-          dropdownIcon?.classList.remove('rotate-180');
+      if (dropdownButton && dropdownMenu && dropdownButton.dataset.initialized !== 'true') {
+        dropdownButton.dataset.initialized = 'true';
+        
+        // dropdown toggle
+        dropdownButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          dropdownMenu.classList.toggle('hidden');
+          dropdownIcon?.classList.toggle('rotate-180');
         });
-      });
 
-      // outside click close
-      document.addEventListener('click', e => {
-        const dropdown = document.getElementById('service-dropdown');
-        if (dropdown && !dropdown.contains(e.target)) {
-          dropdownMenu.classList.add('hidden');
-          dropdownIcon?.classList.remove('rotate-180');
-        }
-      });
+        // dropdown select
+        document.querySelectorAll('.service-option').forEach(option => {
+          option.addEventListener('click', (e) => {
+            e.preventDefault();
+            const value = option.getAttribute('data-value');
 
-      if (!form || form.dataset.initialized) return;
+            if (value && selectedService && serviceInput) {
+              selectedService.textContent = value;
+              selectedService.classList.remove('text-white/70');
+              selectedService.classList.add('text-white');
+              serviceInput.value = value;
+              serviceInput.classList.remove('input-invalid');
+              serviceInput.classList.add('input-valid');
+            }
+
+            dropdownMenu.classList.add('hidden');
+            dropdownIcon?.classList.remove('rotate-180');
+          });
+        });
+
+        // outside click close
+        document.addEventListener('click', e => {
+          const dropdown = document.getElementById('service-dropdown');
+          if (dropdown && !dropdown.contains(e.target)) {
+            dropdownMenu.classList.add('hidden');
+            dropdownIcon?.classList.remove('rotate-180');
+          }
+        });
+      }
+
       form.dataset.initialized = 'true';
-
-      const inputs = [
-        document.getElementById('name'),
-        document.getElementById('email'),
-        document.getElementById('phone'),
-        document.getElementById('service'),
-        document.getElementById('message'),
-      ];
 
       const innerOverlay = document.getElementById('loading-overlay');
       const fullOverlay = document.getElementById('Loading-overlay');
       const submitBtn = form.querySelector('button[type="submit"]');
       const serviceError = document.getElementById('service-error');
 
-      const scriptURL =
-        'https://script.google.com/macros/s/AKfycbyVcd9q-tCzMDfuMuRXraPvKgOHS5VYQlIuQdmgJvmmIa9Mr9rleNQlQnrL61mcluuOKw/exec';
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbyVcd9q-tCzMDfuMuRXraPvKgOHS5VYQlIuQdmgJvmmIa9Mr9rleNQlQnrL61mcluuOKw/exec';
 
-      // live validation
-      inputs.forEach(input => {
+      // Live validation tracking helper
+      const requiredFields = ['name', 'email', 'phone'];
+      requiredFields.forEach(id => {
+        const input = document.getElementById(id);
         if (!input) return;
         input.addEventListener('input', () => {
           if (input.value.trim()) {
@@ -476,18 +468,24 @@ const schema: WithContext<Thing> = {
 
       form.addEventListener('submit', async e => {
         e.preventDefault();
-
         let valid = true;
 
-        inputs.forEach(input => {
-          if (!input) return;
-          if (input.id !== 'message' && !input.value.trim()) {
-            input.classList.add('input-invalid');
+        // Extract individual elements safely to prevent type reference errors
+        const nameEl = document.getElementById('name');
+        const emailEl = document.getElementById('email');
+        const phoneEl = document.getElementById('phone');
+        const serviceEl = document.getElementById('service');
+        const messageEl = document.getElementById('message');
+
+        // Validate required elements
+        [nameEl, emailEl, phoneEl].forEach(input => {
+          if (!input || !input.value.trim()) {
+            input?.classList.add('input-invalid');
             valid = false;
           }
         });
 
-        if (!serviceInput.value) {
+        if (!serviceEl || !serviceEl.value) {
           serviceError?.classList.remove('hidden');
           valid = false;
         } else {
@@ -496,65 +494,73 @@ const schema: WithContext<Thing> = {
 
         if (!valid) {
           form.classList.add('shake');
-
-          submitBtn.textContent = 'Complete all fields';
-          submitBtn.classList.add('bg-red-500', 'text-white');
+          if (submitBtn) {
+            submitBtn.textContent = 'Complete all fields';
+            submitBtn.classList.add('bg-red-500', 'text-white');
+          }
 
           setTimeout(() => {
             form.classList.remove('shake');
-            submitBtn.textContent = 'Book Appointment';
-            submitBtn.classList.remove('bg-red-500', 'text-white');
+            if (submitBtn) {
+              submitBtn.textContent = 'Book Appointment';
+              submitBtn.classList.remove('bg-red-500', 'text-white');
+            }
           }, 1600);
-
           return;
         }
 
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Booking Appointment...';
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Booking Appointment...';
+        }
 
         innerOverlay?.classList.remove('hidden');
         fullOverlay?.classList.remove('hidden');
 
-        // Formulating clean plain object data to match e.postData.contents expectations
+        // Safely compile object layout matching JSON.parse requirements
         const formData = {
-          name: inputs[0].value.trim(),
-          email: inputs[1].value.trim(),
-          phone: inputs[2].value.trim(),
-          service: inputs[3].value.trim(),
-          message: inputs[4].value.trim()
+          name: nameEl ? nameEl.value.trim() : '',
+          email: emailEl ? emailEl.value.trim() : '',
+          phone: phoneEl ? phoneEl.value.trim() : '',
+          service: serviceEl ? serviceEl.value.trim() : '',
+          message: messageEl ? messageEl.value.trim() : ''
         };
 
         try {
-          // Sending raw text format to prevent CORS flight blockages while maintaining pure JSON layout
+          // Fire request directly to your Apps Script Web App
           await fetch(scriptURL, {
             method: 'POST',
             mode: 'no-cors',
             headers: {
-              'Content-Type': 'text/plain;charset=utf-8',
+              'Content-Type': 'text/plain;charset=utf-8'
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(formData)
           });
 
+          // Handle seamless deployment redirect transitions
           setTimeout(() => {
             innerOverlay?.classList.add('opacity-0');
             fullOverlay?.classList.add('opacity-0');
 
-            setTimeout(async () => {
+            setTimeout(() => {
               if (document.startViewTransition) {
-                await document.startViewTransition(() => {
-                  window.location.assign('/booking-success');
+                document.startViewTransition(() => {
+                  window.location.href = '/booking-success';
                 });
               } else {
-                window.location.assign('/booking-success');
+                window.location.href = '/booking-success';
               }
-            }, 400);
-          }, 1200);
+            }, 200);
+          }, 1000);
+
         } catch (error) {
-          console.error('Data dispatch mismatch:', error);
+          console.error('Submission processing exception:', error);
           innerOverlay?.classList.add('hidden');
           fullOverlay?.classList.add('hidden');
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Book Appointment';
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Book Appointment';
+          }
         }
       });
     }
