@@ -42,6 +42,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  output: 'server', // Kept your original configuration intact
-  adapter: getAdapter(), // 3. Dynamically handles the host provider
+  output: 'static', // Kept your original configuration intact
+  
 });
