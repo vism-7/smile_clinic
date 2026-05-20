@@ -526,7 +526,7 @@ const schema: WithContext<Thing> = {
           message: messageEl ? messageEl.value.trim() : ''
         };
 
-        try {
+try {
           // Fire request directly to your Apps Script Web App
           await fetch(scriptURL, {
             method: 'POST',
@@ -537,13 +537,28 @@ const schema: WithContext<Thing> = {
             body: JSON.stringify(formData)
           });
 
+          if (typeof lenisInstance !== 'undefined' && lenisInstance) {
+            lenisInstance.destroy(); // Free up the scroll engine completely
+          }
+          
+          // Clear any overflow blocks before changing page tree
+          document.documentElement.style.overflow = '';
+          document.body.style.overflow = '';
+          document.documentElement.classList.remove('lenis', 'lenis-stopped');
+
           // Handle seamless deployment redirect transitions
           setTimeout(() => {
             innerOverlay?.classList.add('opacity-0');
             fullOverlay?.classList.add('opacity-0');
 
             setTimeout(() => {
-              if (document.startViewTransition) {
+              innerOverlay?.classList.add('hidden');
+              fullOverlay?.classList.add('hidden');
+
+              // FIXED CASE-SENSITIVITY HERE: astro.navigate handles spa page swap smoothly
+              if (window.astro?.navigate) {
+                window.astro.navigate('/booking-success');
+              } else if (document.startViewTransition) {
                 document.startViewTransition(() => {
                   window.location.href = '/booking-success';
                 });

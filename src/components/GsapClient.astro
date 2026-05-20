@@ -17,41 +17,45 @@
     }
     ScrollTrigger.getAll().forEach((t) => t.kill());
 
-const isMobile = window.innerWidth < 768;
+    const isMobile = window.innerWidth < 768;
 
-    // LENIS SMOOTH SCROLL (MOBILE ENGINE TUNING)
+    // LENIS SMOOTH SCROLL (NATIVE MOBILE PROFILE)
     lenisInstance = new Lenis({
-      // Increase duration on mobile to slow down the scroll deceleration profile
       duration: isMobile ? 0.6 : 1.2, 
       syncTouch: false,
-      // Lower than 1.0 down to 0.8 to actively dampen physical phone flick speeds
       touchMultiplier: 1.0, 
     });
 
     // CONNECT GSAP + LENIS
     lenisInstance.on('scroll', ScrollTrigger.update);
 
-    tickerCallback = () => {
-      lenisInstance?.raf(gsap.ticker.time * 1000);
+    // Fixed: accurately pass dynamic animation frame timestamps to support high-refresh rate phone panels
+    tickerCallback = (time: number) => {
+      lenisInstance?.raf(time * 1000);
     };
 
     gsap.ticker.add(tickerCallback);
     gsap.ticker.lagSmoothing(0);
 
+    // PANELS REVEAL (OPTIMIZED FOR HIGH-PERFORMANCE MOBILE VIEWS)
     const panels = document.querySelectorAll('.panel');
     if (panels.length > 0) {
       panels.forEach((panel) => {
         gsap.fromTo(
           panel,
-          { opacity: 0, y: 70 },
+          { 
+            opacity: 0, 
+            y: isMobile ? 20 : 60 // Drops the heavy 70px push on mobile to save layout painting overhead
+          },
           {
             opacity: 1,
             y: 0,
-            duration: 1.2,
+            duration: isMobile ? 0.6 : 1.0, // Snappier runtime profile clears out micro-stutters
             ease: 'power3.out',
+            force3D: true,                  // Forces hardware rasterizer layer tracking
             scrollTrigger: {
               trigger: panel,
-              start: 'top 85%',
+              start: isMobile ? 'top 95%' : 'top 85%', // Catches the section execution earlier on phones
               toggleActions: 'play none none reverse',
             },
           }
@@ -59,27 +63,25 @@ const isMobile = window.innerWidth < 768;
       });
     }
 
-    // UNIVERSAL REVEAL (UPDATED FOR HIGH SPEED & CRISP TIMING)
+    // UNIVERSAL REVEAL
     const reveals = document.querySelectorAll('.reveal-up');
     if (reveals.length > 0) {
       reveals.forEach((item) => {
-        const isMobile = window.innerWidth < 768;
         gsap.fromTo(
           item,
           { 
             opacity: 0, 
-            y: isMobile ? 18 : 35 // Smaller distance = looks punchier
+            y: isMobile ? 14 : 35 
           },
           {
             opacity: 1,
             y: 0,
-            duration: isMobile ? 0.7 : 0.8, // Cut down to 0.5s for rapid desktop feel
-            ease: 'power3.out',             // Faster speed curve break
+            duration: isMobile ? 0.6 : 0.8, 
+            ease: 'power3.out',             
             force3D: true,
-
             scrollTrigger: {
               trigger: item,
-              start: isMobile ? 'top 93%' : 'top 85%', // Triggers higher up so you catch the fast motion
+              start: isMobile ? 'top 93%' : 'top 85%', 
               toggleActions: 'play none none reverse',
             },
           }
