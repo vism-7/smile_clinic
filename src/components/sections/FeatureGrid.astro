@@ -85,7 +85,7 @@ const features = [
       {
         features.map((feature, index) => (
           <div
-            class={`group relative overflow-hidden rounded-[2.8rem] border border-slate-200/70 bg-white shadow-[0_20px_80px_rgba(15,23,42,0.06)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_100px_rgba(15,23,42,0.12)] ${
+            class={`reveal-up group relative overflow-hidden rounded-[2.8rem] border border-slate-200/70 bg-white shadow-[0_20px_80px_rgba(15,23,42,0.06)] transition duration-500 hover:-translate-y-1 hover:shadow-[0_30px_100px_rgba(15,23,42,0.12)] ${
               index % 2 !== 0 ? 'lg:ml-24' : 'lg:mr-24'
             }`}
           >
@@ -94,7 +94,7 @@ const features = [
             <div class="absolute top-0 right-0 h-48 w-48 rounded-full bg-teal-100/50 blur-3xl"></div>
 
             <div
-              class={`reveal-up grid items-center gap-0 lg:grid-cols-2 ${
+              class={`grid items-center gap-0 lg:grid-cols-2 ${
                 index % 2 !== 0 ? 'lg:[&>*:first-child]:order-2' : ''
               }`}
             >

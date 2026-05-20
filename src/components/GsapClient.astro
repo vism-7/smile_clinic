@@ -1,7 +1,7 @@
 <script>
   import gsap from 'gsap';
   import ScrollTrigger from 'gsap/ScrollTrigger';
-  import Lenis from '@studio-freight/lenis';
+  import Lenis from 'lenis';
 
   gsap.registerPlugin(ScrollTrigger);
   
@@ -17,34 +17,39 @@
     }
     ScrollTrigger.getAll().forEach((t) => t.kill());
 
-    // LENIS SMOOTH SCROLL
+    const isMobile = window.innerWidth < 768;
+
+    // LENIS SMOOTH SCROLL (OPTIMIZED FOR PHONES)
     lenisInstance = new Lenis({
-      duration: 1,
-      syncTouch: false,
-      touchMultiplier: 2,
+      duration: isMobile ? 0.8 : 1.2, // Slightly snappier duration handles physical phone swiping better
+      syncTouch: true,                // Crucial: Blends native touch execution smoothly with animation frames
+      touchMultiplier: 1.0,           // Don't fight native physics velocity profiles on mobile glass        // Prevents mobile browser address bars from breaking trigger computations
     });
 
     // CONNECT GSAP + LENIS
     lenisInstance.on('scroll', ScrollTrigger.update);
 
-    tickerCallback = () => {
-      lenisInstance?.raf(gsap.ticker.time * 1000);
+    // Pass timestamps properly to support all device refresh rates (60Hz to 120Hz panels)
+    tickerCallback = (time: number) => {
+      lenisInstance?.raf(time * 1000);
     };
 
     gsap.ticker.add(tickerCallback);
     gsap.ticker.lagSmoothing(0);
 
+    // PANELS REVEAL
     const panels = document.querySelectorAll('.panel');
     if (panels.length > 0) {
       panels.forEach((panel) => {
         gsap.fromTo(
           panel,
-          { opacity: 0, y: 70 },
+          { opacity: 0, y: 50 },
           {
             opacity: 1,
             y: 0,
-            duration: 1.2,
+            duration: 1,
             ease: 'power3.out',
+            force3D: true, // Allocates hardware rendering threads
             scrollTrigger: {
               trigger: panel,
               start: 'top 85%',
@@ -55,26 +60,25 @@
       });
     }
 
-    // UNIVERSAL REVEAL (UPDATED FOR HIGH SPEED & CRISP TIMING)
+    // UNIVERSAL REVEAL-UP
     const reveals = document.querySelectorAll('.reveal-up');
     if (reveals.length > 0) {
       reveals.forEach((item) => {
-        const isMobile = window.innerWidth < 768;
         gsap.fromTo(
           item,
           { 
             opacity: 0, 
-            y: isMobile ? 20 : 40 // Smaller distance = looks punchier
+            y: isMobile ? 15 : 30 // Tight visual distance looks incredibly snappy on small viewports
           },
           {
             opacity: 1,
             y: 0,
-            duration: isMobile ? 0.4 : 0.5, // Cut down to 0.5s for rapid desktop feel
-            ease: 'power2.out',             // Faster speed curve break
-
+            duration: isMobile ? 0.5 : 0.6,
+            ease: 'power2.out',
+            force3D: true,             // Forces GPU layer execution to eliminate phone jitter
             scrollTrigger: {
               trigger: item,
-              start: isMobile ? 'top 95%' : 'top 85%', // Triggers higher up so you catch the fast motion
+              start: isMobile ? 'top 90%' : 'top 85%', // Prevents clipping items near the bottom frame
               toggleActions: 'play none none reverse',
             },
           }
