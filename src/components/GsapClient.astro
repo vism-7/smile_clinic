@@ -17,11 +17,15 @@
     }
     ScrollTrigger.getAll().forEach((t) => t.kill());
 
-    // LENIS SMOOTH SCROLL
+const isMobile = window.innerWidth < 768;
+
+    // LENIS SMOOTH SCROLL (MOBILE ENGINE TUNING)
     lenisInstance = new Lenis({
-      duration: 1,
-      syncTouch: false,
-      touchMultiplier: 2,
+      // Increase duration on mobile to slow down the scroll deceleration profile
+      duration: isMobile ? 1.4 : 1.2, 
+      syncTouch: true,
+      // Lower than 1.0 down to 0.8 to actively dampen physical phone flick speeds
+      touchMultiplier: isMobile ? 0.8 : 1.0, 
     });
 
     // CONNECT GSAP + LENIS
@@ -64,17 +68,17 @@
           item,
           { 
             opacity: 0, 
-            y: isMobile ? 20 : 40 // Smaller distance = looks punchier
+            y: isMobile ? 10 : 30 // Smaller distance = looks punchier
           },
           {
             opacity: 1,
             y: 0,
-            duration: isMobile ? 0.4 : 0.5, // Cut down to 0.5s for rapid desktop feel
+            duration: isMobile ? 0.8 : 0.6, // Cut down to 0.5s for rapid desktop feel
             ease: 'power2.out',             // Faster speed curve break
 
             scrollTrigger: {
               trigger: item,
-              start: isMobile ? 'top 95%' : 'top 85%', // Triggers higher up so you catch the fast motion
+              start: isMobile ? 'top 92%' : 'top 85%', // Triggers higher up so you catch the fast motion
               toggleActions: 'play none none reverse',
             },
           }
