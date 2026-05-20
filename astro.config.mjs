@@ -39,8 +39,16 @@ export default defineConfig({
     db(),
     svelte(),
   ],
-  vite: {
+ vite: {
     plugins: [tailwindcss()],
+    // Forces Vite to use standard Node behavior for Astro DB setup hooks
+    environments: {
+      ssr: {
+        resolve: {
+          conditions: process.env.NODE_ENV === 'production' ? ['node'] : []
+        }
+      }
+    }
   },
   output: 'server', // Kept your original configuration intact
   adapter: getAdapter(), // 3. Dynamically handles the host provider
