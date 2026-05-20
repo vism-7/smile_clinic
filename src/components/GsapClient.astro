@@ -68,18 +68,18 @@ const isMobile = window.innerWidth < 768;
           item,
           { 
             opacity: 0, 
-            y: isMobile ? 10 : 30 // Smaller distance = looks punchier
+            y: isMobile ? 18 : 35 // Smaller distance = looks punchier
           },
           {
             opacity: 1,
             y: 0,
-            duration: isMobile ? 0.5 : 0.6, // Cut down to 0.5s for rapid desktop feel
-            ease: 'power2.out',             // Faster speed curve break
+            duration: isMobile ? 0.7 : 0.8, // Cut down to 0.5s for rapid desktop feel
+            ease: 'power3.out',             // Faster speed curve break
             force3D: true,
 
             scrollTrigger: {
               trigger: item,
-              start: isMobile ? 'top 90%' : 'top 85%', // Triggers higher up so you catch the fast motion
+              start: isMobile ? 'top 93%' : 'top 85%', // Triggers higher up so you catch the fast motion
               toggleActions: 'play none none reverse',
             },
           }
