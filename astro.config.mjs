@@ -1,17 +1,31 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-import vercel from '@astrojs/vercel';
 import react from '@astrojs/react';
 import markdoc from '@astrojs/markdoc';
 import keystatic from '@keystatic/astro';
 import db from '@astrojs/db';
 import svelte from '@astrojs/svelte';
 
+// 1. Import all three platform adapters
+import vercel from '@astrojs/vercel';
+import netlify from '@astrojs/netlify';
+import cloudflare from '@astrojs/cloudflare';
+
+// 2. Define a function to swap them automatically depending on where you deploy
+function getAdapter() {
+  if (process.env.CF_PAGES || process.env.CLOUDFLARE_ACCOUNT_ID) {
+    return cloudflare({ imageService: 'compile' });
+  }
+  if (process.env.NETLIFY) {
+    return netlify();
+  }
+  // Default fallback to your original Vercel adapter
+  return vercel();
+}
+
 // https://astro.build/config
 export default defineConfig({
-  // The `site` property specifies the base URL for your site.
-  // Be sure to update this to your own domain (e.g., "https://yourdomain.com") before deploying.
   site: 'https://smile-clinic-two.vercel.app',
   prefetch: true,
   trailingSlash: 'never',
@@ -28,6 +42,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  output: 'server',
-  adapter: vercel(),
+  output: 'server', // Kept your original configuration intact
+  adapter: getAdapter(), // 3. Dynamically handles the host provider
 });
