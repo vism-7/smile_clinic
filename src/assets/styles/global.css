@@ -169,9 +169,3 @@ body {
     filter: blur(0px);
   }
 }
-
-@media (max-width: 767px) {
-  .reveal-up {
-    will-change: transform, opacity;
-  }
-}
