@@ -12,7 +12,7 @@ import svelte from '@astrojs/svelte';
 export default defineConfig({
   // The `site` property specifies the base URL for your site.
   // Be sure to update this to your own domain (e.g., "https://yourdomain.com") before deploying.
-  site: 'https://data-nova.vercel.app',
+  site: 'https://smile-clinic-two.vercel.app',
   prefetch: true,
   trailingSlash: 'never',
   experimental: {
